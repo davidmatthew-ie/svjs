@@ -1,0 +1,19 @@
+{
+  "name": "svj",
+  "version": "1.0.0",
+  "description": "Scalable Vector JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmatthew-ie/svj.git"
+  },
+  "author": "David Matthew  ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidmatthew-ie/svj/issues"
+  },
+  "homepage": "https://github.com/davidmatthew-ie/svj#readme"
+}
