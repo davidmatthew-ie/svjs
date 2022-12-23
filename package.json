@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/davidmatthew-ie/svj/issues"
   },
-  "homepage": "https://github.com/davidmatthew-ie/svj#readme"
+  "homepage": "https://github.com/davidmatthew-ie/svj#readme",
+  "devDependencies": {
+    "parcel": "^2.8.2"
+  }
 }
