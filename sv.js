@@ -6,9 +6,11 @@ export default class SvJs {
   /**
    * Class fields.
    */
+  cursorX = null;
+  cursorY = null;
   elementName;
   namespace = 'http://www.w3.org/2000/svg';
-  
+
   /**
    * Create an SVG element.
    * 
@@ -78,13 +80,40 @@ export default class SvJs {
   }
 
   /**
+   * Get accurate cursor position x and y values via matrix transformation.
+   * 
+   * @param {Event} event - The global window event object.
+   * @returns {Array} An array containing the x and y value.
+   */
+  trackCursor() {
+    if (this.elementName !== 'svg') {
+      throw new Error('This function can only be called on the main SVG element.');
+    }
+
+    let point = this.element.createSVGPoint();
+
+    this.element.addEventListener('pointermove', (event) => {
+      this.element.style.touchAction = 'none';
+      point.x = event.clientX;
+      point.y = event.clientY;
+      point = point.matrixTransform(this.element.getScreenCTM().inverse());
+      this.cursorX = Math.ceil(point.x);
+      this.cursorY = Math.ceil(point.y);
+    });
+
+    this.element.addEventListener('pointerleave', () => {
+      this.element.style.touchAction = 'auto';
+    });
+  }
+
+  /**
    * Check if the created SVG element is valid.
    * 
    * @param {String} element - The SVG element name to validate.
    */
   #isValid(element) {
     const elementToString = Object.prototype.toString.call(this.element).toLowerCase();
-    
+
     if (elementToString !== `[object svg${element}element]`) {
       throw new Error('Invalid SVG element.');
     }
