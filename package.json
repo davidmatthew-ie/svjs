@@ -1,5 +1,5 @@
 {
-  "name": "svj",
+  "name": "svjs",
   "version": "1.0.0",
   "description": "Scalable Vector JavaScript",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidmatthew-ie/svj.git"
+    "url": "git+https://github.com/davidmatthew-ie/svjs.git"
   },
   "author": "David Matthew  ",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/davidmatthew-ie/svj/issues"
+    "url": "https://github.com/davidmatthew-ie/svjs/issues"
   },
-  "homepage": "https://github.com/davidmatthew-ie/svj#readme",
+  "homepage": "https://github.com/davidmatthew-ie/svjs#readme",
   "devDependencies": {
     "parcel": "^2.8.2"
   }
