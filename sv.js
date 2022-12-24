@@ -14,8 +14,8 @@ export default class SvJs {
   /**
    * Create an SVG element.
    * 
-   * @param {String} element - The name of the SVG element to create. 
-   * @param {String} namespace - The namespace url to reference.
+   * @param {string} element - The name of the SVG element to create. 
+   * @param {string} namespace - The namespace url to reference.
    */
   constructor(element = 'svg', namespace = this.namespace) {
     this.element = document.createElementNS(namespace, element);
@@ -32,7 +32,7 @@ export default class SvJs {
   /**
    * Add the SVG element to the specified node.
    * 
-   * @param {Node} node - A HTML or SVG parent node.
+   * @param {node} node - A HTML or SVG parent node.
    */
   addTo(node) {
     node.appendChild(this.element);
@@ -41,11 +41,11 @@ export default class SvJs {
   /**
    * Create and append an SVG child element.
    * 
-   * @param {String} element - The name of the SVG element to create.
-   * @returns {Object} The created SVG child element.
+   * @param {string} element - The name of the SVG element to create.
+   * @returns {object} The created SVG child element.
    */
   create(element) {
-    this.child = new SVJ(element);
+    this.child = new SvJs(element);
     this.element.appendChild(this.child.element);
 
     return this.child;
@@ -71,7 +71,7 @@ export default class SvJs {
   /**
    * Set the attribute values of an SVG element.
    * 
-   * @param {Object} attributes - An object of attribute value pairs.
+   * @param {object} attributes - An object of attribute value pairs.
    */
   set(attributes) {
     for (let key in attributes) {
@@ -80,10 +80,9 @@ export default class SvJs {
   }
 
   /**
-   * Get accurate cursor position x and y values via matrix transformation.
+   * Update the cursorX and cursorY properties on the main SVG element.
    * 
-   * @param {Event} event - The global window event object.
-   * @returns {Array} An array containing the x and y value.
+   * Accurate cursor tracking via matrix transformation. Compatible with touch devices.
    */
   trackCursor() {
     if (this.elementName !== 'svg') {
