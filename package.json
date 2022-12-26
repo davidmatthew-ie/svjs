@@ -1,16 +1,24 @@
 {
   "name": "svjs",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "Scalable Vector JavaScript",
-  "main": "index.js",
+  "source": "src/index.js",
+  "module": "dist/svjs.min.js",
+  "targets": {
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -r dist",
+    "start": "parcel watch",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidmatthew-ie/svjs.git"
   },
-  "author": "David Matthew  ",
+  "author": "David Matthew",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/davidmatthew-ie/svjs/issues"
