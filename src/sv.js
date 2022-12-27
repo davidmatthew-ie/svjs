@@ -57,8 +57,9 @@ export default class SvJs {
   }
 
   /**
-   * Create a gradient and append it to the defs element (which it creates if it doesn't exist).
+   * Create a gradient and append it to the defs element.
    * 
+   * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
    * @param {string} type - Accepts linear or radial.
    * @param {number} rotation - The angle of rotation. 
@@ -66,9 +67,7 @@ export default class SvJs {
    * @returns {object} The created gradient element.
    */
   createGradient(id, type = 'linear', rotation = 45, units = 'objectBoundingBox') {
-    if (this.elementName !== 'svg') {
-      throw new Error('This function can only be called on the main SVG element.');
-    }
+    this.#isMainSVG();
     
     const gradient = new SvJs(`${type}Gradient`);
     gradient.set({
@@ -77,13 +76,29 @@ export default class SvJs {
       gradientTransform: `rotate(${rotation})`
     });
 
-    const defs = document.querySelector('defs') ?
-      document.querySelector('defs')
-      : this.create('defs').element;
-
+    const defs = this.#defsCheck();
     defs.appendChild(gradient.element);
 
     return gradient;
+  }
+
+  /**
+   * Create a pattern and append it to the defs element.
+   * 
+   * @chainable
+   * @param {string} id - The id. Reference this when applying the gradient.
+   * @returns {object} The created pattern element.
+   */
+  createPattern(id) {
+    this.#isMainSVG();
+    
+    const pattern = new SvJs('pattern');
+    pattern.set({ id: id });
+
+    const defs = this.#defsCheck();
+    defs.appendChild(pattern.element);
+
+    return pattern;
   }
 
   /**
@@ -126,9 +141,7 @@ export default class SvJs {
    * @returns {object} itself.
    */
   trackCursor() {
-    if (this.elementName !== 'svg') {
-      throw new Error('This function can only be called on the main SVG element.');
-    }
+    this.#isMainSVG();
 
     let point = this.element.createSVGPoint();
 
@@ -146,6 +159,28 @@ export default class SvJs {
     });
 
     return this;
+  }
+
+  /**
+   * Check if the def element already exists, and create it if it doesn't.
+   * 
+   * @returns {object} The defs element.
+   */
+  #defsCheck(element) {
+    return document.querySelector('defs') ?
+      document.querySelector('defs')
+      : this.create('defs').element;
+  }
+
+  /**
+   * Check if the element is the main SVG element.
+   * 
+   * @throws {error} if the element is not the main SVG.
+   */
+  #isMainSVG() {
+    if (this.elementName !== 'svg') {
+      throw new Error('This function can only be called on the main SVG element.');
+    }
   }
 
   /**
