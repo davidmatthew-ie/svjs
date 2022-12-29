@@ -1,7 +1,9 @@
 {
   "name": "svjs",
   "version": "0.9.0",
-  "description": "Scalable Vector JavaScript",
+  "description": "Scalable Vector JavaScript. A very light object-oriented library to help generative artists working with SVG.",
+  "author": "David Matthew <davidmatthew.ie@gmail.com> (https://davidmatthew.ie)",
+  "license": "ISC",
   "source": "src/index.js",
   "module": "dist/svjs.min.js",
   "targets": {
@@ -18,8 +20,6 @@
     "type": "git",
     "url": "git+https://github.com/davidmatthew-ie/svjs.git"
   },
-  "author": "David Matthew",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/davidmatthew-ie/svjs/issues"
   },
