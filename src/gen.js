@@ -11,8 +11,34 @@ const gen = {
    * @returns {number} The constrained number.
    */
   constrain: function(num, min, max) {
-    let number = Math.min(Math.max(num, min), max);
-    return number;
+    return Math.min(Math.max(num, min), max);
+  },
+
+  /**
+   * Calculates the distance between two points using the Pythagorean theorem.
+   * 
+   * @param {number} x1 - The first x co-ordinate.
+   * @param {number} y1 - The first y co-ordinate.
+   * @param {number} x2 - The second x co-ordinate.
+   * @param {number} y2 - The second y co-ordinate.
+   * @returns {number} The distance between (x1, y1) and (x2, y2).
+   */
+  dist: function(x1, y1, x2, y2) {
+    let a = x1 - x2;
+    let b = y1 - y2;
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+  },
+
+  /**
+   * Interpolates linearly between two values. Returns the midway point (0.5) by default.
+   * 
+   * @param {number} start - The first value.
+   * @param {number} stop - The second value.
+   * @param {number} amount - The amount of interpolation, between 0.0 and 1.0.
+   * @returns {number} The interpolated value.
+   */
+  interp: function(start, stop, amount = 0.5) {
+    return amount * (stop - start) + start;
   },
 
   /**
@@ -25,8 +51,7 @@ const gen = {
    */
   random: function(min, max, integer = true) {
     let random = Math.random() * (max - min) + min;
-    let number = integer ? Math.floor(random) : random;
-    return number;
+    return integer ? Math.floor(random) : random;
   }
 }
 
