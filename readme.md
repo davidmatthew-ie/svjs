@@ -33,7 +33,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 
 ### Method List:
 
-* [SvJs()](#svjs)
+* [SvJs()](#svjs())
 * [addTo()](#addto)
 * [create()](#create)
 * [createGradient](#creategradient)
