@@ -4,6 +4,9 @@ SvJs is a very light object-oriented library to help generative artists working 
 
 It is a thin wrapper over the real SVG spec with some useful generative functions included. This keeps its footprint extremely small whilst maintaining fidelity to the SVG spec.
 
+* [Installation](#installation)
+* [Core SVG Functions](#core-svg-functions)
+
 ## Installation
 
 ### NPM
@@ -24,13 +27,11 @@ To install via the CDN link, ensure your script tag has `type="module"` declared
 import { SvJs } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js';
 ```
 
-## How to Use
-
-### Core SVG Functions
+## Core SVG Functions
 
 The `SvJs` class located at `src/sv.js` contains the core SVG-related functionality.
 
-#### Method List:
+### Method List:
 
 * [new SvJs()](#new-svjs)
 * [addTo()](#addto)
@@ -39,7 +40,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 
 <hr>
 
-#### new SvJs()
+### `new SvJs()`
 
 Class constructor. Creates a new SVG element.
 
@@ -60,7 +61,7 @@ const rect = new SvJs('rect');
 
 <hr>
 
-#### addTo()
+### `addTo()`
 
 Add (or append) one element to another.
 
@@ -81,7 +82,7 @@ rect.addTo(svg);
 
 <hr>
 
-#### create()
+### `create()`
 
 This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
 
@@ -99,7 +100,7 @@ const rect = svg.create('rect');
 
 <hr>
 
-#### createGradient()
+### `createGradient()`
 
 Shortcut method to a gradient and append it to the defs element. If will create a defs element if it doesn't already exist.
 
