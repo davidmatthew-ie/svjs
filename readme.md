@@ -47,7 +47,7 @@ const rect = new SvJs('rect');
 Add (or append) one element to another.
 
 * Paramaters: 
- - node - A HTML or SVG parent node.
+  node (required) - A HTML or SVG parent node.
 * Returns: itself.
 
 
