@@ -42,14 +42,13 @@ const svg = new SvJs();
 const rect = new SvJs('rect'); 
 ```
 
-#### `addTo(node)`
+#### addTo(node)
 
 Add (or append) one element to another.
 
-* Paramaters: 
-  node (required) - A HTML or SVG parent node.
-* Returns: itself.
-
+*Paramaters:*
+* node (required) - A HTML or SVG parent node.
+*Returns:* itself.
 
 ```javascript
 // Appends the main svg to an element with the id of 'container'.
