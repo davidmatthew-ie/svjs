@@ -14,7 +14,7 @@ To install via npm:
 npm install svjs
 ```
 
-You can then import it either via the `dist` folder (minified, with all modules included) or import just the modules you want via the `src`folder.
+You can then import it either via the `dist` folder (minified, with all modules included) or import just the modules you want via the `src` folder.
 
 ### CDN
 
@@ -29,8 +29,6 @@ import { SvJs } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js'
 ### Core SVG Functions
 
 The `SvJs` class located at `src/sv.js` contains the core SVG-related functionality.
-
-Any of the class methods that return themselves are chainable.
 
 #### Method List:
 
@@ -49,6 +47,8 @@ _Paramaters:_
 * element (optional) - The SVG element you want to create. Leave blank for SVG.
 
 _Returns:_ itself.
+
+_Chainable:_ yes.
 
 ```javascript
 // To create a parent SVG element, no arguments are required.
@@ -69,6 +69,8 @@ _Paramaters:_
 
 _Returns:_ itself.
 
+_Chainable:_ yes.
+
 ```javascript
 // Appends the main svg to an element with the id of 'container'.
 svg.addTo(document.getElementById('container'));
@@ -84,9 +86,11 @@ rect.addTo(svg);
 This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
 
 _Paramaters:_
-* element (required) - The SVG element you want to create.
+* element {string} (required) - The SVG element you want to create.
 
-_Returns:_ itself.
+_Returns:_ the created child element.
+
+_Chainable:_ yes.
 
 ```javascript
 // This is an alternative way of creating the rect and appending it to the svg.
@@ -97,6 +101,26 @@ const rect = svg.create('rect');
 
 #### createGradient()
 
+Shortcut method to a gradient and append it to the defs element. If will create a defs element if it doesn't already exist.
+
+Can only be called on the parent SVG element.
+
+_Parameters:_
+* id {string} (required) Reference this when applying the gradient.
+* type {string} (optional) - Accepts linear or radial. Default is linear.
+* rotation {number} (optional) - The angle of rotation. 
+* units {string} (optional) - Accepts userSpaceOnUse or objectBoundingBox. Default is objectBoundingBox.
+
+_Returns:_ itself (the created gradient element).
+
+_Chainable:_ yes.
+
 ```javascript
+const grad = svg.createGradient('myGradient', 'linear', 45);
+
+grad.create('stop').set({ 'offset': '0%', 'stop-color': 'white' });
+grad.create('stop').set({ 'offset': '100%', 'stop-color': 'purple' });
+
+rect.set({ fill: 'url(#myGradient)' });
 ```
 
