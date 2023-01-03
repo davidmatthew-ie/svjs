@@ -33,16 +33,18 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 
 ### Method List:
 
-* [new SvJs()](#new-svjs)
+* [SvJs()](#svjs)
 * [addTo()](#addto)
 * [create()](#create)
 * [createGradient](#creategradient)
 
 <hr>
 
-### `new SvJs()`
+### `SvJs()`
 
 Class constructor. Creates a new SVG element.
+
+Throws an error if the argument passed isn't a valid SVG element.
 
 _Paramaters:_
 * element (optional) - The SVG element you want to create. Leave blank for SVG.
@@ -86,6 +88,8 @@ rect.addTo(svg);
 
 This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
 
+Throws an error if the argument passed isn't a valid SVG element.
+
 _Paramaters:_
 * element {string} (required) - The SVG element you want to create.
 
@@ -102,9 +106,9 @@ const rect = svg.create('rect');
 
 ### `createGradient()`
 
-Shortcut method to a gradient and append it to the defs element. If will create a defs element if it doesn't already exist.
+Shortcut method to create a gradient and append it to the defs element. If will create a defs element if it doesn't already exist.
 
-Can only be called on the parent SVG element.
+Can only be called by the parent SVG element. Throws error otherwise.
 
 _Parameters:_
 * id {string} (required) Reference this when applying the gradient.
