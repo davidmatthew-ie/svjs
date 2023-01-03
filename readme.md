@@ -32,19 +32,23 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 
 Any of the class methods that return themselves are chainable.
 
+#### Method List:
+
 * [new SvJs()](#new-svjs)
 * [addTo()](#addto)
 * [create()](#create)
 * [createGradient](#creategradient)
 
+<hr>
+
 #### new SvJs()
 
-Creates a new SVG element.
+Class constructor. Creates a new SVG element.
 
-*Paramaters:*
+_Paramaters:_
 * element (optional) - The SVG element you want to create. Leave blank for SVG.
 
-*Returns:* itself.
+_Returns:_ itself.
 
 ```javascript
 // To create a parent SVG element, no arguments are required.
@@ -54,14 +58,16 @@ const svg = new SvJs();
 const rect = new SvJs('rect'); 
 ```
 
+<hr>
+
 #### addTo()
 
 Add (or append) one element to another.
 
-__Paramaters:__
+_Paramaters:_
 * node (required) - A HTML or SVG parent node.
 
-__Returns:__ itself.
+_Returns:_ itself.
 
 ```javascript
 // Appends the main svg to an element with the id of 'container'.
@@ -71,32 +77,26 @@ svg.addTo(document.getElementById('container'));
 rect.addTo(svg);
 ```
 
+<hr>
+
 #### create()
 
 This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
+
+_Paramaters:_
+* element (required) - The SVG element you want to create.
+
+_Returns:_ itself.
 
 ```javascript
 // This is an alternative way of creating the rect and appending it to the svg.
 const rect = svg.create('rect');
 ```
 
+<hr>
+
 #### createGradient()
 
 ```javascript
 ```
-
-```javascript
-```
-
-```javascript
-```
-
-```javascript
-```
-
-```javascript
-```
-
-### Generative Functions
-
 
