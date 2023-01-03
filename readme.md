@@ -30,9 +30,21 @@ import { SvJs } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js'
 
 The `SvJs` class located at `src/sv.js` contains the core SVG-related functionality.
 
-#### `new SvJs()`
+Any of the class methods that return themselves are chainable.
 
-Creates a new SVG element:
+* [new SvJs()](#new-svjs)
+* [addTo()](#addto)
+* [create()](#create)
+* [createGradient](#creategradient)
+
+#### new SvJs()
+
+Creates a new SVG element.
+
+*Paramaters:*
+* element (optional) - The SVG element you want to create. Leave blank for SVG.
+
+*Returns:* itself.
 
 ```javascript
 // To create a parent SVG element, no arguments are required.
@@ -42,13 +54,14 @@ const svg = new SvJs();
 const rect = new SvJs('rect'); 
 ```
 
-#### addTo(node)
+#### addTo()
 
 Add (or append) one element to another.
 
-*Paramaters:*
+__Paramaters:__
 * node (required) - A HTML or SVG parent node.
-*Returns:* itself.
+
+__Returns:__ itself.
 
 ```javascript
 // Appends the main svg to an element with the id of 'container'.
@@ -58,7 +71,7 @@ svg.addTo(document.getElementById('container'));
 rect.addTo(svg);
 ```
 
-* `create()`
+#### create()
 
 This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
 
@@ -67,7 +80,7 @@ This is a shortcut method to create and append a child element. It is essentiall
 const rect = svg.create('rect');
 ```
 
-* `createGradient()`
+#### createGradient()
 
 ```javascript
 ```
