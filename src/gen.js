@@ -42,6 +42,21 @@ const gen = {
   },
 
   /**
+   * Re-maps a number from one range to another.
+   *
+   * @param {number} value - The value to be converted.
+   * @param {number} start1 - The lower bound of the current range.
+   * @param {number} stop1 - The upper bound of the current range.
+   * @param {number} start2 - The lower bound of the target range.
+   * @param {number} stop2 - The upper bound of the target range.
+   * @returns {number} The remapped number.
+   */
+  mapRange: function(value, start1, stop1, start2, stop2) {
+    let n = (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+    return n;
+  },
+
+  /**
    * Gets a random number between a minimum and maximum value.
    * 
    * @param {number} min - Result is equal to or higher than this.
