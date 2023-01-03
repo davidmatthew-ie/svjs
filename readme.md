@@ -18,9 +18,73 @@ You can then import it either via the `dist` folder (minified, with all modules 
 
 ### CDN
 
-To install via the CDN link, ensure your script tag has `type="module"` declared. Then import it as follows:
+To install via the CDN link, ensure your script tag has `type="module"` declared. Then import it as follows (replace `latest` with a specific version if you prefer):
 
 ```javascript
 import { SvJs } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js';
 ```
+
+## How to Use
+
+### Core SVG Functions
+
+The `SvJs` class located at `src/sv.js` contains the core SVG-related functionality.
+
+#### `new SvJs()`
+
+Creates a new SVG element:
+
+```javascript
+// To create a parent SVG element, no arguments are required.
+const svg = new SvJs(); 
+
+// To create a specific element, use the element name as the argument.
+const rect = new SvJs('rect'); 
+```
+
+#### `addTo(node)`
+
+Add (or append) one element to another.
+
+* Paramaters: 
+ - node - A HTML or SVG parent node.
+* Returns: itself.
+
+
+```javascript
+// Appends the main svg to an element with the id of 'container'.
+svg.addTo(document.getElementById('container'));
+
+// Appends the rect element to the parent SVG.
+rect.addTo(svg);
+```
+
+* `create()`
+
+This is a shortcut method to create and append a child element. It is essentially the same as calling a `new SvJs(element)` and afterwards calling `addTo(parentElement)`.
+
+```javascript
+// This is an alternative way of creating the rect and appending it to the svg.
+const rect = svg.create('rect');
+```
+
+* `createGradient()`
+
+```javascript
+```
+
+```javascript
+```
+
+```javascript
+```
+
+```javascript
+```
+
+```javascript
+```
+
+### Generative Functions
+
 
