@@ -6,6 +6,7 @@ It is a thin wrapper over the real SVG spec with some useful generative function
 
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
+* [Generative Functions](#generative-functions)
 
 ## Installation
 
@@ -234,4 +235,41 @@ svg.set({ viewBox: '0 0 1000 1000' }).trackCursor();
 
 console.log(svg.cursorX, svg.cursorY);
 // -> 210, 502
+```
+
+<hr>
+
+## Generative Functions
+
+The generative functions can be imported via the optional `gen` module. They are especially useful for generative art.
+
+```javascript
+import { gen } from '../../svjs/src/index.js';
+```
+
+### Function List
+
+* random()
+
+<hr>
+
+### `random()`
+
+Gets a random number between a minimum and maximum value.
+
+Without parameters, it will return a float between 0 and 1.
+
+_Parameters:_
+* min {number} (optional) The minimum value (result is equal to or higher than this). Default is 0.
+* max {number} (optional) The maximum value (result is lower than this). Default is 1.
+* integer {boolean} (optional) Default is false. Set to true to return an integer.
+
+_Returns:_ {number} The random number.
+
+```javascript
+console.log(gen.random());
+// -> 0.7243874346090846
+
+console.log(gen.random(0, 100, true));
+// -> 4
 ```

@@ -64,7 +64,7 @@ const gen = {
    * @param {boolean} integer - Default is true. Set to false to return a float.
    * @returns {number} The randomised integer.
    */
-  random: function(min, max, integer = true) {
+  random: function(min = 0, max = 1, integer = false) {
     let random = Math.random() * (max - min) + min;
     return integer ? Math.floor(random) : random;
   }
