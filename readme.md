@@ -36,7 +36,12 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 * [new SvJs()](#new-svjs)
 * [addTo()](#addto)
 * [create()](#create)
-* [createGradient](#creategradient)
+* [createGradient()](#creategradient)
+* [createPattern()](#createpattern)
+* [delete()](#delete)
+* [get()](#get)
+* [set()](#set)
+* [trackCusor()](#trackcursor)
 
 <hr>
 
