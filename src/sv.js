@@ -127,7 +127,8 @@ export default class SvJs {
    */
   set(attributes) {
     for (let key in attributes) {
-      this.element.setAttributeNS(null, key, attributes[key]);
+      let prop = key.replace(/_/g, '-');
+      this.element.setAttributeNS(null, prop, attributes[key]);
     }
 
     return this;

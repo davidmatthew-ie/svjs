@@ -33,21 +33,21 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 
 ### Method List:
 
-* [SvJs()](#svjs())
+* [new SvJs()](#new-svjs)
 * [addTo()](#addto)
 * [create()](#create)
 * [createGradient](#creategradient)
 
 <hr>
 
-### `SvJs()`
+### `new SvJs()`
 
 Class constructor. Creates a new SVG element.
 
 Throws an error if the argument passed isn't a valid SVG element.
 
 _Paramaters:_
-* element (optional) - The SVG element you want to create. Leave blank for SVG.
+* element {object} (optional) - The SVG element you want to create. Leave blank for SVG.
 
 _Returns:_ itself.
 
@@ -68,7 +68,7 @@ const rect = new SvJs('rect');
 Add (or append) one element to another.
 
 _Paramaters:_
-* node (required) - A HTML or SVG parent node.
+* node {object} (required) - A HTML or SVG parent node.
 
 _Returns:_ itself.
 
