@@ -113,7 +113,7 @@ Can only be called by the parent SVG element. Throws error otherwise.
 _Parameters:_
 * id {string} (required) Reference this when applying the gradient.
 * type {string} (optional) - Accepts linear or radial. Default is linear.
-* rotation {number} (optional) - The angle of rotation. 
+* rotation {number} (optional) - The angle of rotation. Default is 45.
 * units {string} (optional) - Accepts userSpaceOnUse or objectBoundingBox. Default is objectBoundingBox.
 
 _Returns:_ itself (the created gradient element).
@@ -121,11 +121,112 @@ _Returns:_ itself (the created gradient element).
 _Chainable:_ yes.
 
 ```javascript
-const grad = svg.createGradient('myGradient', 'linear', 45);
+const grad = svg.createGradient('myGradient', 'linear', 60);
 
-grad.create('stop').set({ 'offset': '0%', 'stop-color': 'white' });
-grad.create('stop').set({ 'offset': '100%', 'stop-color': 'purple' });
+grad.create('stop').set({ offset: '0%', stop_color: 'white' });
+grad.create('stop').set({ offset: '100%', stop_color: 'purple' });
 
 rect.set({ fill: 'url(#myGradient)' });
 ```
 
+<hr>
+
+### `createPattern()`
+
+A shortcut method to create a pattern and append it to the defs element. If will create a defs element if it doesn't already exist. The actual pattern elements can then be added as children.
+
+Can only be called by the parent SVG element. Throws error otherwise.
+
+_Parameters:_
+* id {string} (required) Reference this when applying the pattern.
+
+_Returns:_ itself (the created pattern element).
+
+_Chainable:_ yes.
+
+<hr>
+
+### `delete()`
+
+Removes the element.
+
+_Parameters:_ none.
+
+_Returns:_ undefined.
+
+_Chainable:_ no.
+
+<hr>
+
+### `get()`
+
+Fetches the value of the attribute, which is supplied as the argument.
+
+_Parameters:_
+* attribute {*} (required) The attribute.
+
+_Returns:_ The attribute's value.
+
+_Chainable:_ no.
+
+```javascript
+// Get the fill value of our rect element.
+rect.get('fill');
+```
+
+<hr>
+
+### `set()`
+
+Set the attribute value(s) of an SVG element.
+
+For attributes that contain a dash (e.g. stroke-width), use an underscore instead (stroke_width).
+
+_Parameters:_
+* attributes {object} (required) The attribute-value pair(s), supplied as an object.
+
+_Returns:_ The original element.
+
+_Chainable:_ yes.
+
+```javascript
+// Create a circle element and set its attributes.
+const circle = svg.create('circle');
+
+circle.set({
+  cx: 500,
+  cy: 500,
+  r: 250,
+  fill: 'crimson',
+  stroke: 'gold',
+  stroke_width: 5
+});
+```
+
+<hr>
+
+### `trackCursor()`
+
+Update the `cursorX` and `cursorY` properties on the main SVG element. These are set to null by default; calling `trackCursor()` activates the event listeners needed to update them.
+
+Can only be called by the parent SVG element. Throws error otherwise.
+
+Accurate cursor tracking is done via matrix transformation (normal cursor tracking using `clientX` and `clientY` values don't work with SVG). Compatible with touch devices.
+
+Values of `cursorX` and `cursorY` are relative to the `viewBox`.
+
+_Parameters:_ none.
+
+_Returns:_ itself (the parent SVG element).
+
+_Chainable:_ yes.
+
+```javascript
+// Create an svg element and activate cursor tracking.
+const svg = new SvJs();
+
+svg.set({ viewBox: '0 0 1000 1000' }).trackCursor();
+
+console.log(svg.cursorX, svg.cursorY);
+// -> 210, 502
+```

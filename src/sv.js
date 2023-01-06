@@ -119,7 +119,7 @@ export default class SvJs {
   }
 
   /**
-   * Set the attribute values of an SVG element.
+   * Set the attribute values of an SVG element. Replaces _ with - for relevant attributes.
    * 
    * @chainable
    * @param {object} attributes - An object of attribute value pairs.
@@ -128,6 +128,7 @@ export default class SvJs {
   set(attributes) {
     for (let key in attributes) {
       let prop = key.replace(/_/g, '-');
+      
       this.element.setAttributeNS(null, prop, attributes[key]);
     }
 
