@@ -249,7 +249,7 @@ import { gen } from '../../svjs/src/index.js';
 
 ### Function List
 
-* random()
+* [random()](#random)
 
 <hr>
 
@@ -271,5 +271,5 @@ console.log(gen.random());
 // -> 0.7243874346090846
 
 console.log(gen.random(0, 100, true));
-// -> 4
+// -> 42
 ```
