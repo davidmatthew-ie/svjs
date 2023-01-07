@@ -249,7 +249,98 @@ import { gen } from '../../svjs/src/index.js';
 
 ### Function List
 
+* [constrain()](#constrain)
+* [dist()](#dist)
+* [interp()](#interp)
+* [mapRange()](#maprange)
 * [random()](#random)
+
+<hr>
+
+### `constrain()`
+
+Constrains (or clamps) a value between a minimum and maximum value.
+
+_Parameters:_
+* num {number} (required) The number to constrain.
+* min {number} (required) The minimum limit.
+* max {number} (required) The maximum limit.
+
+_Returns:_ {number} The constrained number.
+
+```javascript
+gen.constrain(50, 5, 10);
+// -> 10
+
+gen.constrain(2, 5, 10);
+// -> 5
+
+gen.constrain(6, 5, 10);
+// -> 6
+```
+
+<hr>
+
+### `dist()`
+
+Calculates the distance between two points using the Pythagorean theorem.
+
+_Parameters:_
+* x1 {number} (required) The first x co-ordinate.
+* y1 {number} (required) The first y co-ordinate.
+* x2 {number} (required) The second x co-ordinate.
+* y2 {number} (required) The second y co-ordinate.
+
+_Returns:_ {number} The distance between (x1, y1) and (x2, y2).
+
+```javascript
+gen.dist(10, 12, 40, 50);
+// -> 48.41487374764082
+```
+
+<hr>
+
+### `interp()`
+
+Interpolates linearly between two values. Returns the midway point (0.5) by default.
+
+_Parameters:_
+* start {number} (required) The first value.
+* stop {number} (required) The second value.
+* amount {number} (optional) The amount of interpolation, between 0.0 and 1.0. Default is 0.5.
+
+_Returns:_ {number} interpolated value.
+
+```javascript
+gen.interp(5, 10);
+// -> 7.5
+
+gen.interp(5, 10, 0.4);
+// -> 7
+
+gen.interp(5.25, 10.95);
+// -> 8.1
+```
+
+<hr>
+
+### `mapRange()`
+
+Re-maps a number from one range to another.
+
+_Parameters:_
+* value {number} (required) The value to be converted.
+* start1 {number} (required) The lower bound of the current range.
+* stop1 {number} (required) The upper bound of the current range.
+* start2 {number} (required) The lower bound of the target range.
+* stop2 {number} (required) The upper bound of the target range.
+
+_Returns:_ {number} The remapped number.
+
+```javascript
+gen.mapRange(5, 0, 10, 0, 100);
+// -> 50
+```
 
 <hr>
 
@@ -267,9 +358,9 @@ _Parameters:_
 _Returns:_ {number} The random number.
 
 ```javascript
-console.log(gen.random());
+gen.random();
 // -> 0.7243874346090846
 
-console.log(gen.random(0, 100, true));
+gen.random(0, 100, true);
 // -> 42
 ```
