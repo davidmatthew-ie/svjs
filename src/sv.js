@@ -57,6 +57,72 @@ export default class SvJs {
   }
 
   /**
+   * Creates a smooth bezier curve from an array of points.
+   * 
+   * @chainable
+   * @param {array} points - An two-dimensional array of [[x,y], [x,y]...] points.
+   * @param {number} curveFactor - 0 means no curve. Default is 1.66 (approximates a circle given a square).
+   * @param {boolean} isClosed - Is the curve open or closed. Default is false (so curve is open).
+   * @param {string} stroke - The stroke colour. Black by default.
+   * @param {string} fill - The fill colour. None by default.
+   */
+  createBezier(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
+    let path = new SvJs('path');
+
+    if (isClosed) {
+      let first = points[0];
+      let second = points[1];
+      let secondLast = points[points.length - 2];
+      let last = points[points.length - 1];
+  
+      points.push(first, second);
+      points.unshift(secondLast, last);
+    }
+  
+    points = points.flat();
+  
+    let moveX = isClosed ? points[2] : points[0];
+    let moveY = isClosed ? points[3] : points[1];
+  
+    let pathData = `M ${[moveX, moveY]}`;
+  
+    let iStart = isClosed ? 2 : 0;
+    let iEnd = isClosed ? points.length - 4 : points.length - 2;
+  
+    for (let i = iStart; i < iEnd; i += 2) {
+      let x0 = i ? points[i - 2] : points[0];
+      let y0 = i ? points[i - 1] : points[1];
+  
+      let x1 = points[i];
+      let y1 = points[i + 1];
+  
+      let x2 = points[i + 2];
+      let y2 = points[i + 3];
+  
+      let x3 = i !== points.length - 4 ? points[i + 4] : x2;
+      let y3 = i !== points.length - 4 ? points[i + 5] : y2;
+  
+      let cp1x = x1 + ((x2 - x0) / 6) * curveFactor;
+      let cp1y = y1 + ((y2 - y0) / 6) * curveFactor;
+  
+      let cp2x = x2 - ((x3 - x1) / 6) * curveFactor;
+      let cp2y = y2 - ((y3 - y1) / 6) * curveFactor;
+  
+      pathData += `C ${[cp1x, cp1y, cp2x, cp2y, x2, y2]}`;
+    }
+
+    path.set({
+      d: pathData,
+      stroke: stroke,
+      fill: fill
+    });
+
+    this.element.appendChild(path.element);
+
+    return path;
+  }
+
+  /**
    * Create a gradient and append it to the defs element.
    * 
    * @chainable

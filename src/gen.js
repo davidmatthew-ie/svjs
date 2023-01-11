@@ -52,8 +52,7 @@ const gen = {
    * @returns {number} The remapped number.
    */
   mapRange: function(value, start1, stop1, start2, stop2) {
-    let n = (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-    return n;
+    return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
   },
 
   /**
