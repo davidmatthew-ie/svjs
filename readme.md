@@ -4,6 +4,8 @@ SvJs is a very light object-oriented library to help generative artists working 
 
 It is a thin wrapper over the real SVG spec with some useful generative functions included. This keeps its footprint extremely small whilst maintaining fidelity to the SVG spec.
 
+It is inspired by [gySVG](https://github.com/graphery/graphery/tree/master/svg), a great little library, but takes a different approach under the hood and is more geared towards generative art. 
+
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
 * [Generative Functions](#generative-functions)

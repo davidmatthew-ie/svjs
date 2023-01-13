@@ -69,4 +69,4 @@ const gen = {
   }
 }
 
-export default gen;
+export { gen };

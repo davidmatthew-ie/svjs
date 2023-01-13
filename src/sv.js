@@ -1,7 +1,7 @@
 /**
  * A class to instantiate a new SvJs element.
  */
-export default class SvJs {
+class SvJs {
 
   /**
    * Class fields.
@@ -265,3 +265,5 @@ export default class SvJs {
     }
   }
 }
+
+export { SvJs };
