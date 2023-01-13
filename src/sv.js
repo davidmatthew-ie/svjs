@@ -60,9 +60,9 @@ export default class SvJs {
    * Creates a smooth bezier curve from an array of points.
    * 
    * @chainable
-   * @param {array} points - An two-dimensional array of [[x,y], [x,y]...] points.
+   * @param {array} points - A two-dimensional array of [[x,y], [x,y]...] points.
    * @param {number} curveFactor - 0 means no curve. Default is 1.66 (approximates a circle given a square).
-   * @param {boolean} isClosed - Is the curve open or closed. Default is false (so curve is open).
+   * @param {boolean} isClosed - Is the curve open or closed. Default is false (an open curve).
    * @param {string} stroke - The stroke colour. Black by default.
    * @param {string} fill - The fill colour. None by default.
    * @returns {object} The created path.
