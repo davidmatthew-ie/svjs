@@ -110,6 +110,35 @@ const rect = svg.create('rect');
 
 <hr>
 
+### `createBezier()`
+
+Creates a smooth bezier curve from an array of points.
+
+_Parameters:_
+* points {array} (required) A two-dimensional array of `[[x,y], [x,y]...]` points.
+* curveFactor {number} (optional) 0 means no curve. Default is 1.66 (approximates a circle given a square).
+* isClosed {boolean} (optional) Is the curve open or closed. Default is false (an open curve).
+* stroke {string} (optional) The stroke colour. Black by default.
+* fill {string} (optional) The fill colour. None by default.
+
+_Returns:_ The created path object.
+
+_Chainable:_ yes.
+
+```javascript
+// Given a viewBox of '0 0 1000 1000', the below creates a closed circular curve.
+const pts = [
+  [500, 300],
+  [300, 500],
+  [500, 700],
+  [700, 500],
+];
+
+const path = svg.createBezier(pts, 1.66, true, '#f00', 'gold');
+```
+
+<hr>
+
 ### `createGradient()`
 
 Shortcut method to create a gradient and append it to the defs element. If will create a defs element if it doesn't already exist.

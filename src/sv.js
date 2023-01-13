@@ -65,6 +65,7 @@ export default class SvJs {
    * @param {boolean} isClosed - Is the curve open or closed. Default is false (so curve is open).
    * @param {string} stroke - The stroke colour. Black by default.
    * @param {string} fill - The fill colour. None by default.
+   * @returns {object} The created path.
    */
   createBezier(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
     let path = new SvJs('path');
