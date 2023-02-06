@@ -226,6 +226,7 @@ _Returns:_ undefined.
 _Chainable:_ no.
 
 ```javascript
+// Call the save method by pressing the 's' key.
 document.addEventListener('keydown', (event) => {
   if (event.code === 'KeyS') {
     svg.save();
