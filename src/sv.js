@@ -178,11 +178,25 @@ class SvJs {
   /**
    * Get a given attribute's value.
    * 
-   * @param {*} attribute - The attribute.
+   * @param {string} attribute - The attribute.
    * @returns {*} the attribute value.
    */
   get(attribute) {
     return this.element.getAttributeNS(null, attribute);
+  }
+
+  /**
+   * Saves and downloads the SVG markup.
+   * 
+   * @returns {SVGElement} the attribute value.
+   */
+  save() {
+    let data = this.element.outerHTML;
+    let file = new Blob([data], {type: 'text/plain;charset=utf-8'});
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = prompt('Enter the file name', 'download.svg');
+    a.click();
   }
 
   /**

@@ -44,6 +44,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 * [createPattern()](#createpattern)
 * [delete()](#delete)
 * [get()](#get)
+* [save()](#save)
 * [set()](#set)
 * [trackCusor()](#trackcursor)
 
@@ -201,7 +202,7 @@ _Chainable:_ no.
 Fetches the value of the attribute, which is supplied as the argument.
 
 _Parameters:_
-* attribute {*} (required) The attribute.
+* attribute {string} (required) The attribute.
 
 _Returns:_ The attribute's value.
 
@@ -210,6 +211,26 @@ _Chainable:_ no.
 ```javascript
 // Get the fill value of our rect element.
 rect.get('fill');
+```
+
+<hr>
+
+### `save()`
+
+Saves the generated `<svg>` markup as a downloadable file.
+
+_Parameters:_ none.
+
+_Returns:_ undefined.
+
+_Chainable:_ no.
+
+```javascript
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'KeyS') {
+    svg.save();
+  }
+});
 ```
 
 <hr>
