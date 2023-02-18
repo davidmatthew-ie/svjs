@@ -136,14 +136,14 @@ class SvJs {
   createGradient(id, type = 'linear', rotation = 45, units = 'objectBoundingBox') {
     this.#isMainSVG();
     
-    const gradient = new SvJs(`${type}Gradient`);
+    let gradient = new SvJs(`${type}Gradient`);
     gradient.set({
       id: id,
       gradientUnits : `${units}`,
       gradientTransform: `rotate(${rotation})`
     });
 
-    const defs = this.#defsCheck();
+    let defs = this.#defsCheck();
     defs.appendChild(gradient.element);
 
     return gradient;
@@ -159,13 +159,39 @@ class SvJs {
   createPattern(id) {
     this.#isMainSVG();
     
-    const pattern = new SvJs('pattern');
+    let pattern = new SvJs('pattern');
     pattern.set({ id: id });
 
-    const defs = this.#defsCheck();
+    let defs = this.#defsCheck();
     defs.appendChild(pattern.element);
 
     return pattern;
+  }
+
+  /**
+   * Create a text element.
+   * 
+   * @chainable
+   * @param {string} content - The text content.
+   * @param {number} x - The x co-ordinate of the bottom-left of the text's bounding box.
+   * @param {number} y - The y co-ordinate of the bottom-left of the text's bounding box.
+   * @param {number} size - The font-size.
+   * @param {string} fill - The colour of the text.
+   * @returns {object} The created text element.
+   */
+  createText(content, x, y, size = 25, fill = '#eee') {
+    let text = new SvJs('text');
+    text.set({
+      x: x,
+      y: y,
+      fill: fill,
+      font_size: size
+    });
+    text.element.innerHTML = content;
+    
+    this.element.appendChild(text.element);
+
+    return text;
   }
 
   /**
@@ -272,7 +298,7 @@ class SvJs {
    * @param {string} element - The SVG element name to validate.
    */
   #isValid(element) {
-    const elementToString = Object.prototype.toString.call(this.element).toLowerCase();
+    let elementToString = Object.prototype.toString.call(this.element).toLowerCase();
 
     if (elementToString !== `[object svg${element.toLowerCase()}element]`) {
       throw new Error(`Invalid SVG element: ${elementToString}`); 
