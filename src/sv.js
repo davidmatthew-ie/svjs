@@ -67,7 +67,7 @@ class SvJs {
    * @param {string} fill - The fill colour. None by default.
    * @returns {object} The created path.
    */
-  createBezier(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
+  createCurve(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
     let path = new SvJs('path');
 
     if (isClosed) {

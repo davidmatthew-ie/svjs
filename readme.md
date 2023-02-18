@@ -39,7 +39,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 * [new SvJs()](#new-svjs)
 * [addTo()](#addto)
 * [create()](#create)
-* [createBezier()](#createbezier)
+* [createCurve()](#createcurve)
 * [createGradient()](#creategradient)
 * [createPattern()](#createpattern)
 * [delete()](#delete)
@@ -114,9 +114,9 @@ const rect = svg.create('rect');
 
 <hr>
 
-### `createBezier()`
+### `createCurve()`
 
-Creates a smooth bezier curve from an array of points.
+Creates a smooth cubic bezier curve from an array of points.
 
 _Parameters:_
 * points {array} (required) A two-dimensional array of `[[x,y], [x,y]...]` points.
@@ -138,7 +138,7 @@ const pts = [
   [700, 500],
 ];
 
-const path = svg.createBezier(pts, 1.66, true, '#f00', 'gold');
+const path = svg.createCurve(pts, 1.66, true, '#f00', 'gold');
 ```
 
 <hr>
