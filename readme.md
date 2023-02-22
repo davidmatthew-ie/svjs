@@ -153,7 +153,6 @@ _Parameters:_
 * id {string} (required) Reference this when applying the gradient.
 * type {string} (optional) - Accepts linear or radial. Default is linear.
 * rotation {number} (optional) - The angle of rotation. Default is 45.
-* units {string} (optional) - Accepts userSpaceOnUse or objectBoundingBox. Default is objectBoundingBox.
 
 _Returns:_ itself (the created gradient element).
 

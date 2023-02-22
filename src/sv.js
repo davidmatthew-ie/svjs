@@ -43,6 +43,19 @@ class SvJs {
   }
 
   /**
+   * Inserts content within an element. Useful for textual elements.
+   * 
+   * @chainable
+   * @param {string} text - The content to insert.
+   * @returns {object} itself.
+   */
+  content(text) {
+    this.element.innerHTML = text;
+
+    return this;
+  }
+
+  /**
    * Create and append an SVG child element.
    *
    * @chainable
@@ -129,17 +142,16 @@ class SvJs {
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
    * @param {string} type - Accepts linear or radial.
-   * @param {number} rotation - The angle of rotation. 
-   * @param {string} units - Accepts userSpaceOnUse or objectBoundingBox.
+   * @param {number} rotation - The angle of rotation.
    * @returns {object} The created gradient element.
    */
-  createGradient(id, type = 'linear', rotation = 45, units = 'objectBoundingBox') {
+  createGradient(id, type = 'linear', rotation = 45) {
     this.#isMainSVG();
     
     let gradient = new SvJs(`${type}Gradient`);
     gradient.set({
       id: id,
-      gradientUnits : `${units}`,
+      gradientUnits : 'objectBoundingBox',
       gradientTransform: `rotate(${rotation})`
     });
 
@@ -166,32 +178,6 @@ class SvJs {
     defs.appendChild(pattern.element);
 
     return pattern;
-  }
-
-  /**
-   * Create a text element.
-   * 
-   * @chainable
-   * @param {string} content - The text content.
-   * @param {number} x - The x co-ordinate of the bottom-left of the text's bounding box.
-   * @param {number} y - The y co-ordinate of the bottom-left of the text's bounding box.
-   * @param {number} size - The font-size.
-   * @param {string} fill - The colour of the text.
-   * @returns {object} The created text element.
-   */
-  createText(content, x, y, size = 25, fill = '#eee') {
-    let text = new SvJs('text');
-    text.set({
-      x: x,
-      y: y,
-      fill: fill,
-      font_size: size
-    });
-    text.element.innerHTML = content;
-    
-    this.element.appendChild(text.element);
-
-    return text;
   }
 
   /**
