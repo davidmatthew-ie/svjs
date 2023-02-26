@@ -142,18 +142,18 @@ class SvJs {
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
    * @param {string} type - Accepts linear or radial.
-   * @param {number} rotation - The angle of rotation.
+   * @param {number} rotation - The angle of rotation. Ignored if gradient is radial.
    * @returns {object} The created gradient element.
    */
   createGradient(id, type = 'linear', rotation = 45) {
     this.#isMainSVG();
     
     let gradient = new SvJs(`${type}Gradient`);
-    gradient.set({
-      id: id,
-      gradientUnits : 'objectBoundingBox',
-      gradientTransform: `rotate(${rotation})`
-    });
+    gradient.set({ id: id });
+
+    if (type === 'linear') {
+      gradient.set({ gradientTransform: `rotate(${rotation})` });
+    }
 
     let defs = this.#defsCheck();
     defs.appendChild(gradient.element);
@@ -166,13 +166,22 @@ class SvJs {
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
+   * @param {number} width - The width of the pattern.
+   * @param {number} height - The height of the pattern.
    * @returns {object} The created pattern element.
    */
-  createPattern(id) {
+  createPattern(id, width, height) {
     this.#isMainSVG();
     
     let pattern = new SvJs('pattern');
-    pattern.set({ id: id });
+    pattern.set({
+      id: id,
+      x: 0,
+      y: 0,
+      width: width,
+      height: height,
+      patternUnits: 'userSpaceOnUse'
+    });
 
     let defs = this.#defsCheck();
     defs.appendChild(pattern.element);

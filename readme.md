@@ -177,10 +177,21 @@ Can only be called by the parent SVG element. Throws error otherwise.
 
 _Parameters:_
 * id {string} (required) Reference this when applying the pattern.
+* width {number} (required) The width of the pattern.
+* height {number} (required) The height of the pattern.
 
 _Returns:_ itself (the created pattern element).
 
 _Chainable:_ yes.
+
+```javascript
+const pattern = svg.createPattern('myPattern', 100, 100);
+
+pattern.create('rect').set({ x: 0, y: 0, width: 50, height: 50, fill: '#333' });
+pattern.create('rect').set({ x: 50, y: 50, width: 50, height: 50, fill: '#666' });
+
+rect.set({ fill: 'url(#myPattern)' });
+```
 
 <hr>
 
