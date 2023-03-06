@@ -14,8 +14,8 @@ class SvJs {
   /**
    * Create an SVG element.
    * 
-   * @param {string} element - The name of the SVG element to create. 
-   * @param {string} namespace - The namespace url to reference.
+   * @param {string} [element] - The name of the SVG element to create. 
+   * @param {string} [namespace] - The namespace url to reference.
    */
   constructor(element = 'svg', namespace = this.namespace) {
     this.element = document.createElementNS(namespace, element);
@@ -74,10 +74,10 @@ class SvJs {
    * 
    * @chainable
    * @param {array} points - A two-dimensional array of [[x,y], [x,y]...] points.
-   * @param {number} curveFactor - 0 means no curve. Default is 1.66 (approximates a circle given a square).
-   * @param {boolean} isClosed - Is the curve open or closed. Default is false (an open curve).
-   * @param {string} stroke - The stroke colour. Black by default.
-   * @param {string} fill - The fill colour. None by default.
+   * @param {number} [curveFactor] - 0 means no curve. Default is 1.66 (approximates a circle given a square).
+   * @param {boolean} [isClosed] - Is the curve open or closed. Default is false (an open curve).
+   * @param {string} [stroke] - The stroke colour. Black by default.
+   * @param {string} [fill] - The fill colour. None by default.
    * @returns {object} The created path.
    */
   createCurve(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
@@ -141,8 +141,8 @@ class SvJs {
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
-   * @param {string} type - Accepts linear or radial.
-   * @param {number} rotation - The angle of rotation. Ignored if gradient is radial.
+   * @param {string} [type] - Accepts linear or radial.
+   * @param {number} [rotation] - The angle of rotation. Ignored if gradient is radial.
    * @returns {object} The created gradient element.
    */
   createGradient(id, type = 'linear', rotation = 45) {
