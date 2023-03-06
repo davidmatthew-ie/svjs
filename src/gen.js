@@ -1,7 +1,7 @@
 /**
  * A collection of useful functions for generative art.
  */
-const gen = {
+const Gen = {
   /**
    * Constrains (or clamps) a value between a minimum and maximum value.
    * 
@@ -34,7 +34,7 @@ const gen = {
    * 
    * @param {number} start - The first value.
    * @param {number} stop - The second value.
-   * @param {number} amount - The amount of interpolation, between 0.0 and 1.0.
+   * @param {number} [amount = 0.5] - The amount of interpolation, between 0.0 and 1.0.
    * @returns {number} The interpolated value.
    */
   interp: function(start, stop, amount = 0.5) {
@@ -56,17 +56,22 @@ const gen = {
   },
 
   /**
-   * Gets a random number between a minimum and maximum value.
+   * Gets a random number between a minimum and maximum value, or picks a random item from an array.
    * 
-   * @param {number} min - Result is equal to or higher than this.
-   * @param {number} max - Result is lower than this.
-   * @param {boolean} integer - Default is false. Set to true to return an integer.
-   * @returns {number} The random number.
+   * @param {(number|array)} [min = 0] - Result is equal to or higher than this. If array, an item is randomly chosen.
+   * @param {number} [max = 1] - Result is equal to or lower than this.
+   * @param {boolean} [integer = false] - Set to true to return an integer.
+   * @returns {*} The randomised number or array item.
    */
   random: function(min = 0, max = 1, integer = false) {
-    let random = Math.random() * (max - min) + min;
-    return integer ? Math.floor(random) : random;
+    if (Array.isArray(arguments[0])) {
+      let arr = arguments[0];
+      return arr[Math.round(Math.random() * (arr.length - 1))];
+    } else {
+      let random = Math.random() * (max - min) + min;
+      return integer ? Math.round(random) : random;
+    }
   }
 }
 
-export { gen };
+export { Gen };
