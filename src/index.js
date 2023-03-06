@@ -1,2 +1,2 @@
 export { SvJs } from './sv.js';
-export { gen } from './gen.js';
+export { Gen } from './gen.js';
