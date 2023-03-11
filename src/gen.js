@@ -60,16 +60,16 @@ const Gen = {
    * 
    * @param {(number|array)} [min = 0] - Result is equal to or higher than this. If array, an item is randomly chosen.
    * @param {number} [max = 1] - Result is equal to or lower than this.
-   * @param {boolean} [integer = false] - Set to true to return an integer.
+   * @param {boolean} [float = true] - Set to false to return an integer.
    * @returns {*} The randomised number or array item.
    */
-  random: function(min = 0, max = 1, integer = false) {
+  random: function(min = 0, max = 1, float = true) {
     if (Array.isArray(arguments[0])) {
       let arr = arguments[0];
       return arr[Math.round(Math.random() * (arr.length - 1))];
     } else {
       let random = Math.random() * (max - min) + min;
-      return integer ? Math.round(random) : random;
+      return float ? random : Math.round(random);
     }
   }
 }

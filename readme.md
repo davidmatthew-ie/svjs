@@ -305,10 +305,10 @@ console.log(svg.cursorX, svg.cursorY);
 
 ## Generative Functions
 
-The generative functions can be imported via the optional `gen` module. They are especially useful for generative art.
+The generative functions can be imported via the optional `Gen` module. They are especially useful for generative art.
 
 ```javascript
-import { gen } from '../../svjs/src/index.js';
+import { Gen } from '../../svjs/src/index.js';
 ```
 
 ### Function List
@@ -410,21 +410,33 @@ gen.mapRange(5, 0, 10, 0, 100);
 
 ### `random()`
 
-Gets a random number between a minimum and maximum value.
+Gets a random number between a minimum and maximum value, or picks a random item from an array.
 
 Without parameters, it will return a float between 0 and 1.
 
 _Parameters:_
-* min {number} (optional) The minimum value (result is equal to or higher than this). Default is 0.
-* max {number} (optional) The maximum value (result is lower than this). Default is 1.
-* integer {boolean} (optional) Default is false. Set to true to return an integer.
+* min {number|array} (optional) The minimum value (result is equal to or higher than this). Default is 0. If array, an item is randomly chosen.
+* max {number} (optional) The maximum value (result is equal to or lower than this). Default is 1.
+* float {boolean} (optional) Default is true. Set to false to return an integer.
 
-_Returns:_ {number} The random number.
+_Returns:_ {number} The random number or array item.
 
 ```javascript
-gen.random();
-// -> 0.7243874346090846
+// Return a float between 0 and 1.
+Gen.random();
+-> 0.5682831319665758
 
-gen.random(0, 100, true);
-// -> 42
+// Return a float between 50 and 100.
+Gen.random(50, 100);
+-> 87.98188644344106
+
+// Return a whole number between 10 and 20.
+Gen.random(10, 20, false);
+-> 17
+
+// Return a random item from an array.
+let rainbow = ['red', 'yellow', 'pink', 'green', 'purple', 'orange', 'blue'];
+
+Gen.random(rainbow);
+-> 'purple'
 ```
