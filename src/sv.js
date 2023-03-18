@@ -207,6 +207,35 @@ class SvJs {
   }
 
   /**
+   * Get a given element's centre [x, y] co-ordinates.
+   * 
+   * @returns {array} the centre co-ordinates.
+   */
+  getCentre() {
+    let bbox = this.element.getBBox();
+    let cx = bbox.x + (bbox.width / 2);
+    let cy = bbox.y + (bbox.height / 2);
+    return [cx, cy];
+  }
+
+  /**
+   * Move an element to a desired position with respect to its centre.
+   * 
+   * @chainable
+   * @param {array} position - An array containing the target x and y co-ordinates.
+   * @returns {object} itself.
+   */
+  moveTo(position = [0, 0]) {
+    let centre = this.getCentre();
+    
+    this.set({
+      transform: `translate(${position[0] - centre[0]} ${position[1] - centre[1]})`
+    })
+
+    return this;
+  }
+
+  /**
    * Saves and downloads the SVG markup.
    * 
    * @returns {SVGElement} the attribute value.
