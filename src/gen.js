@@ -3,6 +3,16 @@
  */
 const Gen = {
   /**
+   * Return true if a randomised % is lower than the % supplied as the argument.
+   * 
+   * @param {number} [percentage = 50] - The chance percentage of the return value being true. 50 by default.
+   * @returns {boolean}
+   */
+  chance: function(percentage = 50) {
+    return (percentage > (Math.random() * 100)) ? true : false;
+  },
+
+  /**
    * Constrains (or clamps) a value between a minimum and maximum value.
    * 
    * @param {number} num - The number to constrain.
