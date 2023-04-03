@@ -3,13 +3,15 @@
  */
 const Gen = {
   /**
-   * Return true if a randomised % is lower than the % supplied as the argument.
+   * Return true if the supplied % is higher than a randomised %. If two arguments supplied, they are interpreted as odds.
    * 
-   * @param {number} [percentage = 50] - The chance percentage of the return value being true. 50 by default.
+   * @param {number} [n1 = 50] - The chance of the return value being true. 50 by default.
+   * @param {number} [n2 = null] - If not null, both arguments are interpreted as odds in the form n1 to n2.
    * @returns {boolean}
    */
-  chance: function(percentage = 50) {
-    return (percentage > (Math.random() * 100)) ? true : false;
+  chance: function(n1 = 50, n2 = null) {
+    let n = (n2 !== null) ? n2 / (n1 + n2) * 100 : n1;
+    return n > (Math.random() * 100);
   },
 
   /**
