@@ -70,6 +70,24 @@ class SvJs {
   }
 
   /**
+   * Create a clipPath and add it to the defs.
+   * 
+   * @chainable
+   * @param {string} id - The id. Reference this when applying the clipPath.
+   * @returns {object} The created clipPath element.
+   */
+  createClipPath(id) {
+    this.#isMainSVG();
+    
+    let clipPath = new SvJs('clipPath').set({ id: id });
+
+    let defs = this.#defsCheck();
+    defs.appendChild(clipPath.element);
+
+    return clipPath;
+  }
+
+  /**
    * Creates a smooth bezier curve from an array of points.
    * 
    * @chainable
