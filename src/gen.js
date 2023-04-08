@@ -42,6 +42,21 @@ const Gen = {
   },
 
   /**
+   * Gets a random number based on the Box-Muller gaussian transform.
+   * By default, it typically returns results within a range of -3 to +3.
+   * 
+   * @param {number} [mean = 0] - The mean, 0 by default.
+   * @param {number} [sigma = 1] - Sigma refers to the standard deviation, 1 by default.
+   * @returns {number} The random gaussian.
+   */
+  gaussian: function(mean = 0, sigma = 1) {
+    let u = 1 - Math.random();
+    let v = Math.random();
+    let z = Math.cos(Math.PI * v) * Math.sqrt(-Math.log(u));
+    return z * sigma + mean;
+  },
+
+  /**
    * Interpolates linearly between two values. Returns the midway point (0.5) by default.
    * 
    * @param {number} start - The first value.
