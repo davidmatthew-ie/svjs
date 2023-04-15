@@ -47,13 +47,15 @@ const Gen = {
    * 
    * @param {number} [mean = 0] - The mean, 0 by default.
    * @param {number} [sigma = 1] - Sigma refers to the standard deviation, 1 by default.
+   * @param {boolean} [float = true] - Set to false to return an integer.
    * @returns {number} The random gaussian.
    */
-  gaussian: function(mean = 0, sigma = 1) {
+  gaussian: function(mean = 0, sigma = 1, float = true) {
     let u = 1 - Math.random();
     let v = Math.random();
     let z = Math.cos(Math.PI * v) * Math.sqrt(-Math.log(u));
-    return z * sigma + mean;
+    let g = z * sigma + mean;
+    return float ? g : Math.round(g);
   },
 
   /**
@@ -80,6 +82,20 @@ const Gen = {
    */
   mapRange: function(value, start1, stop1, start2, stop2) {
     return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+  },
+
+  /**
+   * Gets a random number based on the pareto power law distribution (80-20 rule).
+   *
+   * @param {number} min - The minimum value to be returned.
+   * @param {boolean} [float = true] - Set to false to return an integer.
+   * @returns {number} The random pareto number.
+   */
+  pareto: function(min, float = true) {
+    let n = 1.0 - Math.random();
+    let a = Math.log(5) / Math.log(4);
+    let p = min / Math.pow(n, 1.0 / a);
+    return float ? p : Math.round(p);
   },
 
   /**
