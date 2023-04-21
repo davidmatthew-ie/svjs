@@ -28,6 +28,11 @@ class Noise {
   p = new Array(512);
   g = new Array(512);
 
+  /**
+   * Initialise the Noise class with an optional seed value.
+   * 
+   * @param {number} [seed = Math.random()] - Optional seed value.
+   */
   constructor(seed) {
     this.seed = seed;
     this.#init();
@@ -46,6 +51,13 @@ class Noise {
     }
   }
 
+  /**
+   * Get the noise value at the specified co-ordinates.
+   * 
+   * @param {number} x - The noise x co-ordinate.
+   * @param {number} [y = 0] - The noise y co-ordinate.
+   * @returns {number} the noise value (float between 0 and 1).
+   */
   get(x, y = 0) {
     let X = Math.floor(x) & 255;
     let Y = Math.floor(y) & 255;
