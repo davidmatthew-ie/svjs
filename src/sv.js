@@ -141,8 +141,8 @@ class SvJs {
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
-   * @param {string} [type] - Accepts linear or radial.
-   * @param {number} [rotation] - The angle of rotation. Ignored if gradient is radial.
+   * @param {string} [type = linear] - Accepts linear or radial.
+   * @param {number} [rotation = 45] - The angle of rotation. Ignored if gradient is radial.
    * @returns {object} The created gradient element.
    */
   createGradient(id, type = 'linear', rotation = 45) {
