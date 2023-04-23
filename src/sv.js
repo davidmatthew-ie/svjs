@@ -141,11 +141,12 @@ class SvJs {
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
-   * @param {string} [type = linear] - Accepts linear or radial.
+   * @param {string} type - Accepts linear or radial.
+   * @param {array} colours - An array of gradient colours to be applied equidistantly.
    * @param {number} [rotation = 45] - The angle of rotation. Ignored if gradient is radial.
    * @returns {object} The created gradient element.
    */
-  createGradient(id, type = 'linear', rotation = 45) {
+  createGradient(id, type, colours, rotation = 45) {
     this.#isMainSVG();
     
     let gradient = new SvJs(`${type}Gradient`);
@@ -153,6 +154,13 @@ class SvJs {
 
     if (type === 'linear') {
       gradient.set({ gradientTransform: `rotate(${rotation})` });
+    }
+
+    for (let i = 0; i < colours.length; i += 1) {
+      gradient.create('stop').set({
+        stop_color: colours[i],
+        offset: i * (100 / (colours.length - 1)) / 100
+      });
     }
 
     let defs = this.#defsCheck();
@@ -230,7 +238,7 @@ class SvJs {
     
     this.set({
       transform: `translate(${position[0] - centre[0]} ${position[1] - centre[1]})`
-    })
+    });
 
     return this;
   }

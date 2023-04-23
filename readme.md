@@ -151,7 +151,8 @@ Can only be called by the parent SVG element. Throws error otherwise.
 
 _Parameters:_
 * id {string} (required) Reference this when applying the gradient.
-* type {string} (optional) - Accepts linear or radial. Default is linear.
+* type {string} (required) - Accepts linear or radial.
+* colours {array} (required) - An array of gradient colours to be applied equidistantly.
 * rotation {number} (optional) - The angle of rotation. Default is 45.
 
 _Returns:_ itself (the created gradient element).
@@ -159,10 +160,7 @@ _Returns:_ itself (the created gradient element).
 _Chainable:_ yes.
 
 ```javascript
-const grad = svg.createGradient('myGradient', 'linear', 60);
-
-grad.create('stop').set({ offset: '0%', stop_color: 'white' });
-grad.create('stop').set({ offset: '100%', stop_color: 'purple' });
+const grad = svg.createGradient('myGradient', 'linear', ['red', 'orange', 'yellow'], 90);
 
 rect.set({ fill: 'url(#myGradient)' });
 ```
