@@ -153,16 +153,16 @@ _Parameters:_
 * id {string} (required) Reference this when applying the gradient.
 * type {string} (required) - Accepts linear or radial.
 * colours {array} (required) - An array of gradient colours to be applied equidistantly.
-* rotation {number} (optional) - The angle of rotation. Default is 45.
+* rotation {number} (optional) - The angle of rotation (ignored if gradient is radial). Default is 45.
 
 _Returns:_ itself (the created gradient element).
 
 _Chainable:_ yes.
 
 ```javascript
-const grad = svg.createGradient('myGradient', 'linear', ['red', 'orange', 'yellow'], 90);
+const grad = svg.createGradient('sunset', 'linear', ['red', 'orange', 'yellow'], 90);
 
-rect.set({ fill: 'url(#myGradient)' });
+rect.set({ fill: 'url(#sunset)' });
 ```
 
 <hr>
