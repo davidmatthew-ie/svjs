@@ -215,29 +215,30 @@ class SvJs {
   }
 
   /**
-   * Get a given element's centre [x, y] co-ordinates.
+   * Get a given element's centre {x, y} co-ordinates.
    * 
-   * @returns {array} the centre co-ordinates.
+   * @returns {object} the centre.x and centre.y co-ordinates.
    */
   getCentre() {
     let bbox = this.element.getBBox();
     let cx = bbox.x + (bbox.width / 2);
     let cy = bbox.y + (bbox.height / 2);
-    return [cx, cy];
+    return { x: cx, y: cy };
   }
 
   /**
    * Move an element to a desired position with respect to its centre.
    * 
    * @chainable
-   * @param {array} position - An array containing the target x and y co-ordinates.
+   * @param {number} x - The target x co-ordinate.
+   * @param {number} y - The target y co-ordinate.
    * @returns {object} itself.
    */
-  moveTo(position = [0, 0]) {
+  moveTo(x, y) {
     let centre = this.getCentre();
     
     this.set({
-      transform: `translate(${position[0] - centre[0]} ${position[1] - centre[1]})`
+      transform: `translate(${x - centre.x} ${y - centre.y})`
     });
 
     return this;
