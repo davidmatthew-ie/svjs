@@ -215,7 +215,7 @@ class SvJs {
   }
 
   /**
-   * Get a given element's centre {x, y} co-ordinates.
+   * Get a given element's centre { x, y } co-ordinates.
    * 
    * @returns {object} the centre.x and centre.y co-ordinates.
    */
@@ -235,23 +235,24 @@ class SvJs {
    * @returns {object} itself.
    */
   moveTo(x, y) {
-    let centre = this.getCentre();
+    let c = this.getCentre();
+    let t = this.#createTransform();
     
-    this.set({
-      transform: `translate(${x - centre.x} ${y - centre.y})`
-    });
+    t.setTranslate(x - c.x, y - c.y);
 
+    this.element.transform.baseVal.appendItem(t);
+    
     return this;
   }
 
+  
+
   /**
    * Saves and downloads the SVG markup.
-   * 
-   * @returns {SVGElement} the attribute value.
    */
   save() {
     let data = this.element.outerHTML;
-    let file = new Blob([data], {type: 'text/plain;charset=utf-8'});
+    let file = new Blob([data], { type: 'text/plain;charset=utf-8' });
     let a = document.createElement('a');
     a.href = URL.createObjectURL(file);
     a.download = prompt('Enter the file name', 'download.svg');
@@ -301,6 +302,16 @@ class SvJs {
     });
 
     return this;
+  }
+
+  /**
+   * Allows for the creation of a cumulative transform.
+   * 
+   * @returns {object} An SVGTransform object.
+   */
+  #createTransform() {
+    let root = new SvJs();
+    return root.element.createSVGTransform();
   }
 
   /**
