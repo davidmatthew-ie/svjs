@@ -44,6 +44,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 * [createPattern()](#createpattern)
 * [delete()](#delete)
 * [get()](#get)
+* [moveTo()](#moveto)
 * [save()](#save)
 * [set()](#set)
 * [trackCusor()](#trackcursor)
@@ -160,6 +161,7 @@ _Returns:_ itself (the created gradient element).
 _Chainable:_ yes.
 
 ```javascript
+// Create a sunset-coloured gradient and apply it to a rect.
 const grad = svg.createGradient('sunset', 'linear', ['red', 'orange', 'yellow'], 90);
 
 rect.set({ fill: 'url(#sunset)' });
@@ -183,6 +185,7 @@ _Returns:_ itself (the created pattern element).
 _Chainable:_ yes.
 
 ```javascript
+// Create a pattern consisting of two rect elements.
 const pattern = svg.createPattern('myPattern', 100, 100);
 
 pattern.create('rect').set({ x: 0, y: 0, width: 50, height: 50, fill: '#333' });
@@ -219,6 +222,26 @@ _Chainable:_ no.
 ```javascript
 // Get the fill value of our rect element.
 rect.get('fill');
+```
+
+<hr>
+
+### `moveTo()`
+
+Move an element to a desired position with respect to its centre. Particularly useful for groups.
+
+_Paramaters:_
+* x {number} (required) - The target x co-ordinate.
+* y {number} (required) - The target y co-ordinate.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
+
+```javascript
+// Move a rect to the centre of a 1000 x 1000 viewBox.
+rect.moveTo(500, 500);
+
 ```
 
 <hr>
