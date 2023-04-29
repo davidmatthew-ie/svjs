@@ -4,7 +4,7 @@ SvJs is a very light object-oriented library to help generative artists working 
 
 It is a thin wrapper over the real SVG spec with some useful generative functions included. This keeps its footprint extremely small whilst maintaining fidelity to the SVG spec.
 
-It is inspired by [gySVG](https://github.com/graphery/graphery/tree/master/svg), a great little library, but takes a different approach under the hood and is more geared towards generative art. 
+It is inspired by the great [gySVG](https://github.com/graphery/graphery/tree/master/svg) library, but takes a different approach under the hood and is more geared towards generative art. 
 
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
@@ -45,7 +45,9 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 * [delete()](#delete)
 * [get()](#get)
 * [moveTo()](#moveto)
+* [rotate()](#rotate)
 * [save()](#save)
+* [scale()](#scale)
 * [set()](#set)
 * [trackCusor()](#trackcursor)
 
@@ -241,7 +243,26 @@ _Chainable:_ yes.
 ```javascript
 // Move a rect to the centre of a 1000 x 1000 viewBox.
 rect.moveTo(500, 500);
+```
 
+<hr>
+
+### `rotate()`
+
+Rotate an element around a specified origin point (the element centre by default).
+
+_Paramaters:_
+* angle {number} (required) - The angle of rotation.
+* cx {number} (optional) - The origin x co-ordinate.
+* cy {number} (optional) - The origin y co-ordinate.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
+
+```javascript
+// Rotate a rect by 90 degrees around its own centre.
+rect.rotate(90);
 ```
 
 <hr>
@@ -263,6 +284,30 @@ document.addEventListener('keydown', (event) => {
     svg.save();
   }
 });
+```
+
+<hr>
+
+### `scale()`
+
+Scale an element by a desired proportion.
+
+The element is scaled from its centre, which involves an additional translation.
+
+_Paramaters:_
+* sx {number} (required) - The amount to scale on the x-axis.
+* sy {number} (optional) - The amount to scale on the y-axis. Defaults to sx if not supplied.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
+
+```javascript
+// Scale a rect to double its original size.
+rect.scale(2);
+
+// Scale a rect differntly along the x and y axis.
+rect.scale(1.5, 2.5);
 ```
 
 <hr>
