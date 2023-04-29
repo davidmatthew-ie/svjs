@@ -240,12 +240,55 @@ class SvJs {
     
     t.setTranslate(x - c.x, y - c.y);
 
-    this.element.transform.baseVal.appendItem(t);
+    this.#addTransform(t);
     
     return this;
   }
 
-  
+  /**
+   * Rotate an element around a specified origin point (the element centre by default).
+   * 
+   * @chainable
+   * @param {number} angle - The angle of rotation.
+   * @param {number} [cx] - The origin x co-ordinate.
+   * @param {number} [cy] - The origin y co-ordinate.
+   * @returns {object} itself.
+   */
+  rotate(angle, cx = null, cy = null) {
+    let c = this.getCentre();
+    let t = this.#createTransform();
+    cx = (cx === null) ? c.x : cx;
+    cy = (cy === null) ? c.y : cy;
+
+    t.setRotate(angle, cx, cy);
+
+    this.#addTransform(t);
+    
+    return this;
+  }
+
+  /**
+   * Scale an element by a desired proportion.
+   * 
+   * @chainable
+   * @param {number} sx - The amount to scale on the x-axis.
+   * @param {number} [sy] - The amount to scale on the y-axis. Defaults to sx if not supplied.
+   * @returns {object} itself.
+   */
+  scale(sx, sy = null) {
+    let c = this.getCentre();
+    let t1 = this.#createTransform();
+    let t2 = this.#createTransform();
+
+    sy = (sy === null) ? sx : sy;
+    t1.setTranslate((1 - sx) * c.x, (1 - sy) * c.y);
+    t2.setScale(sx, sy);
+    
+    this.#addTransform(t1);
+    this.#addTransform(t2);
+    
+    return this;
+  }
 
   /**
    * Saves and downloads the SVG markup.
@@ -305,7 +348,16 @@ class SvJs {
   }
 
   /**
-   * Allows for the creation of a cumulative transform.
+   * Appends an SVG transform object to a transform list.
+   * 
+   * @param {object} transform - An SVGTransform object.
+   */
+  #addTransform(transform) {
+    this.element.transform.baseVal.appendItem(transform);
+  }
+
+  /**
+   * Alows for the creation of a cumulative transform.
    * 
    * @returns {object} An SVGTransform object.
    */
