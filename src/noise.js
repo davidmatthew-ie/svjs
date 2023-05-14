@@ -1,57 +1,12 @@
 /**
- * An implementation of Ken Perlin's improved noise algorithm in 2D.
+ * An implementation of Ken Perlin's noise algorithm in 2D.
+ * 
+ * With thanks to Joe Iddon. https://github.com/joeiddon/perlin
  */
 class Noise {
-
-  /**
-   * Our class fields.
-   */
-  permutation = [
-    151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36,
-    103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0,
-    26, 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88, 237, 149, 56, 87,
-    174, 20, 125, 136, 171, 168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166, 77, 146,
-    158, 231, 83, 111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245, 40,
-    244, 102, 143, 54, 65, 25, 63, 161, 1, 216, 80, 73, 209, 76, 132, 187, 208, 89, 18,
-    169, 200, 196, 135, 130, 116, 188, 159, 86, 164, 100, 109, 198, 173, 186, 3, 64, 52,
-    217, 226, 250, 124, 123, 5, 202, 38, 147, 118, 126, 255, 82, 85, 212, 207, 206, 59,
-    227, 47, 16, 58, 17, 182, 189, 28, 42, 223, 183, 170, 213, 119, 248, 152, 2, 44, 154,
-    163, 70, 221, 153, 101, 155, 167, 43, 172, 9, 129, 22, 39, 253, 19, 98, 108, 110, 79,
-    113, 224, 232, 178, 185, 112, 104, 218, 246, 97, 228, 251, 34, 242, 193, 238, 210, 144,
-    12, 191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199,
-    106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222,
-    114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
-  ];
-
-  grad = [
-    { x: 1, y: 1 }, { x: -1, y: 1 }, { x: 1, y: -1 }, { x: -1, y: -1 },
-    { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }
-  ];
-
-  p = new Array(512);
-  g = new Array(512);
-
-  /**
-   * Initialise the Noise class with an optional seed value.
-   * 
-   * @param {number} [seed = Math.random()] - Optional seed value.
-   */
-  constructor(seed) {
-    this.seed = seed;
-    this.#init();
-  }
-
-  #init() {
-    let s = this.seed;
-    if (s > 0 && s < 1) s *= 65536;
-    if (s < 256) s |= s << 8;
-    this.seed = Math.floor(s);
-
-    for (let i = 0; i < 256; i += 1) {
-      let v = (i & 1) ? this.permutation[i] ^ (this.seed & 255) : this.permutation[i] ^ ((this.seed >> 8) & 255);
-      this.p[i] = this.p[i + 256] = v;
-      this.g[i] = this.g[i + 256] = this.grad[v % 8];
-    }
+  constructor() {
+    this.grad = {};
+    this.cache = {};
   }
 
   /**
@@ -59,43 +14,46 @@ class Noise {
    * 
    * @param {number} x - The noise x co-ordinate.
    * @param {number} [y = 0] - The noise y co-ordinate.
-   * @returns {number} the noise value (float between 0 and 1).
+   * @returns {number} the noise value (float between -1 and 1).
    */
   get(x, y = 0) {
-    let X = Math.floor(x) & 255;
-    let Y = Math.floor(y) & 255;
-
-    x -= Math.floor(x);
-    y -= Math.floor(y);
-
-    let n1 = this.#dotP(x, this.g[X + this.p[Y]].x, y, this.g[X + this.p[Y]].y);
-    let n2 = this.#dotP(x, this.g[X + this.p[Y + 1]].x, y - 1, this.g[X + this.p[Y + 1]].y);
-    let n3 = this.#dotP(x - 1, this.g[X + 1 + this.p[Y]].x, y, this.g[X + 1 + this.p[Y]].y);
-    let n4 = this.#dotP(x - 1, this.g[X + 1 + this.p[Y + 1]].x, y - 1, this.g[X + 1 + this.p[Y + 1]].y);
-
-    let u = this.#fade(x);
-    let v = this.#fade(y);
-
-    let r = this.#lerp(this.#lerp(n1, n3, u), this.#lerp(n2, n4, u), v)
-    return this.#range(r, -1, 1, 0, 1);
+    if (this.cache.hasOwnProperty([x, y])) return this.cache[[x, y]];
+    
+    let xf = Math.floor(x);
+    let yf = Math.floor(y);
+    
+    let tl = this.#gridDotProduct(x, y, xf, yf);
+    let tr = this.#gridDotProduct(x, y, xf + 1, yf);
+    let bl = this.#gridDotProduct(x, y, xf, yf + 1);
+    let br = this.#gridDotProduct(x, y, xf + 1, yf + 1);
+    
+    let xt = this.#fade(x - xf, tl, tr);
+    let xb = this.#fade(x - xf, bl, br);
+    let v = this.#fade(y - yf, xt, xb);
+    
+    this.cache[[x, y]] = v;
+    
+    return v;
   }
 
-  #fade(x) {
-    return (6 * x ** 5) - (15 * x ** 4) + (10 * x ** 3);
+  #gridDotProduct(x, y, vx, vy){
+    let gVec, dVec = { x: x - vx, y: y - vy };
+
+    if (this.grad[[vx, vy]]){
+      gVec = this.grad[[vx, vy]];
+    } else {
+      let th = Math.random() * 2 * Math.PI;
+      gVec = { x: Math.cos(th), y: Math.sin(th) };
+      this.grad[[vx, vy]] = gVec;
+    }
+
+    return dVec.x * gVec.x + dVec.y * gVec.y;
   }
 
-  #dotP(x1, x2, y1, y2) {
-    return (x1 * x2) + (y1 * y2);
-  };
-
-  #lerp(s, e, a = 0.5) {
-    return a * (e - s) + s;
+  #fade(x, a, b){
+    let s = 6 * x**5 - 15 * x**4 + 10 * x**3;
+    return a + s * (b - a);
   }
-
-  #range(v, s1, e1, s2, e2) {
-    return (v - s1) / (e1 - s1) * (e2 - s2) + s2;
-  }
-
 }
 
 export { Noise };
