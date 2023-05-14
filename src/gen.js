@@ -78,10 +78,12 @@ const Gen = {
    * @param {number} stop1 - The upper bound of the current range.
    * @param {number} start2 - The lower bound of the target range.
    * @param {number} stop2 - The upper bound of the target range.
+   * @param {boolean} [float = true] - Set to false to return an integer.
    * @returns {number} The remapped number.
    */
-  mapRange: function(value, start1, stop1, start2, stop2) {
-    return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+  mapRange: function(value, start1, stop1, start2, stop2, float = true) {
+    let n = (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+    return float ? n : Math.round(n);
   },
 
   /**
