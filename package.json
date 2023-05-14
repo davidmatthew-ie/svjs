@@ -1,6 +1,6 @@
 {
   "name": "svjs",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Scalable Vector JavaScript. A very light object-oriented library to help generative artists working with SVG.",
   "keywords": ["creative coding", "generative", "art", "svg", "svjs", "svgjs"],
   "author": "David Matthew <davidmatthew.ie@gmail.com> (https://davidmatthew.ie)",
