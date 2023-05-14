@@ -268,6 +268,18 @@ class SvJs {
   }
 
   /**
+   * Saves and downloads the SVG markup.
+   */
+  save() {
+    let data = this.element.outerHTML;
+    let file = new Blob([data], { type: 'text/plain;charset=utf-8' });
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = prompt('Enter the file name', 'download.svg');
+    a.click();
+  }
+
+  /**
    * Scale an element by a desired proportion.
    * 
    * @chainable
@@ -288,18 +300,6 @@ class SvJs {
     this.#addTransform(t2);
     
     return this;
-  }
-
-  /**
-   * Saves and downloads the SVG markup.
-   */
-  save() {
-    let data = this.element.outerHTML;
-    let file = new Blob([data], { type: 'text/plain;charset=utf-8' });
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(file);
-    a.download = prompt('Enter the file name', 'download.svg');
-    a.click();
   }
 
   /**
