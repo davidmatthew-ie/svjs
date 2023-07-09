@@ -8,7 +8,6 @@ class SvJs {
    */
   cursorX = null;
   cursorY = null;
-  elementName;
   namespace = 'http://www.w3.org/2000/svg';
 
   /**
@@ -22,9 +21,7 @@ class SvJs {
 
     this.#isValid(element);
 
-    this.elementName = element;
-
-    if (this.elementName === 'svg') {
+    if (this.element.nodeName === 'svg') {
       this.element.setAttribute('xmlns', namespace);
     }
   }
@@ -367,7 +364,7 @@ class SvJs {
    * @throws {error} if the element is not the main SVG.
    */
   #isMainSVG() {
-    if (this.elementName !== 'svg') {
+    if (this.element.nodeName !== 'svg') {
       throw new Error('This function can only be called on the main SVG element.');
     }
   }
