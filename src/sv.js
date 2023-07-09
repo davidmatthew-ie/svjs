@@ -70,40 +70,22 @@ class SvJs {
   }
 
   /**
-   * Creates a smooth bezier curve from an array of points.
+   * Creates a smooth, open bezier curve from an array of points.
    * 
    * @chainable
    * @param {array} points - A two-dimensional array of [[x,y], [x,y]...] points.
-   * @param {number} [curveFactor] - 0 means no curve. Default is 1.66 (approximates a circle given a square).
-   * @param {boolean} [isClosed] - Is the curve open or closed. Default is false (an open curve).
-   * @param {string} [stroke] - The stroke colour. Black by default.
-   * @param {string} [fill] - The fill colour. None by default.
+   * @param {number} [curveFactor = 1] - 0 means no curve (points connected by straight lines). Default is 1.
+   * @param {number} [precision = 5] - The precision of the path data values. 5 by default, meaning to 5 decimal points.
    * @returns {object} The created path.
    */
-  createCurve(points, curveFactor = 1.66, isClosed = false, stroke = '#000', fill = 'none') {
+  createCurve(points, curveFactor = 1, precision = 5) {
     let path = new SvJs('path');
-
-    if (isClosed) {
-      let first = points[0];
-      let second = points[1];
-      let secondLast = points[points.length - 2];
-      let last = points[points.length - 1];
-  
-      points.push(first, second);
-      points.unshift(secondLast, last);
-    }
   
     points = points.flat();
   
-    let moveX = isClosed ? points[2] : points[0];
-    let moveY = isClosed ? points[3] : points[1];
+    let pathData = `M ${[points[0], points[1]]}`;
   
-    let pathData = `M ${[moveX, moveY]}`;
-  
-    let iStart = isClosed ? 2 : 0;
-    let iEnd = isClosed ? points.length - 4 : points.length - 2;
-  
-    for (let i = iStart; i < iEnd; i += 2) {
+    for (let i = 0; i < points.length - 2; i += 2) {
       let x0 = i ? points[i - 2] : points[0];
       let y0 = i ? points[i - 1] : points[1];
   
@@ -121,14 +103,16 @@ class SvJs {
   
       let cp2x = x2 - ((x3 - x1) / 6) * curveFactor;
       let cp2y = y2 - ((y3 - y1) / 6) * curveFactor;
+
+      let p = precision;
   
-      pathData += `C ${[cp1x, cp1y, cp2x, cp2y, x2, y2]}`;
+      pathData += `C ${[cp1x.toFixed(p), cp1y.toFixed(p), cp2x.toFixed(p), cp2y.toFixed(p), x2.toFixed(p), y2.toFixed(p)]}`;
     }
 
     path.set({
       d: pathData,
-      stroke: stroke,
-      fill: fill
+      stroke: '#888',
+      fill: 'none'
     });
 
     this.element.appendChild(path.element);
