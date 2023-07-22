@@ -71,11 +71,10 @@ class SvJs {
    * 
    * @chainable
    * @param {array} points - A two-dimensional array of [[x,y], [x,y]...] points.
-   * @param {number} [curveFactor = 1] - 0 means no curve (points connected by straight lines). Default is 1.
-   * @param {number} [precision = 5] - The precision of the path data values. 5 by default, meaning to 5 decimal points.
+   * @param {number} [curveFactor = 1] - 0 means that points connected by straight lines. Default is 1.
    * @returns {object} The created path.
    */
-  createCurve(points, curveFactor = 1, precision = 5) {
+  createCurve(points, curveFactor = 1) {
     let path = new SvJs('path');
   
     points = points.flat();
@@ -100,10 +99,8 @@ class SvJs {
   
       let cp2x = x2 - ((x3 - x1) / 6) * curveFactor;
       let cp2y = y2 - ((y3 - y1) / 6) * curveFactor;
-
-      let p = precision;
   
-      pathData += `C ${[cp1x.toFixed(p), cp1y.toFixed(p), cp2x.toFixed(p), cp2y.toFixed(p), x2.toFixed(p), y2.toFixed(p)]}`;
+      pathData += `C ${[cp1x, cp1y, cp2x, cp2y, x2, y2]}`;
     }
 
     path.set({
@@ -252,12 +249,17 @@ class SvJs {
    * Saves and downloads the SVG markup.
    */
   save() {
-    let data = this.element.outerHTML;
-    let file = new Blob([data], { type: 'text/plain;charset=utf-8' });
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(file);
-    a.download = prompt('Enter the file name', 'download.svg');
-    a.click();
+    let name = prompt('Enter the file name', 'sketch.svg');
+    if (name !== null) {
+      let a = document.createElement('a');
+      a.download = name;
+      let data = this.element.outerHTML;
+      let file = new Blob([data], { type: 'text/plain;charset=utf-8' });
+      a.href = URL.createObjectURL(file);
+      a.click();
+    } else {
+      return;
+    } 
   }
 
   /**
