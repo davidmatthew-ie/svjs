@@ -26,6 +26,11 @@ class SvJs {
     }
   }
 
+  addEventListener(type, callback) {
+    this.element.addEventListener(type, callback);
+    return this;
+  }
+
   /**
    * Add the SVG element to the specified node.
    * 
@@ -35,6 +40,21 @@ class SvJs {
    */
   addTo(node) {
     node.appendChild(this.element);
+
+    return this;
+  }
+
+  /**
+   * Animate an attribute of an element. Set the second argument to false to use an <animateTransform> element.
+   * 
+   * @chainable
+   * @param {object} attributes - An object of attribute-value pairs.
+   * @param {boolean} [standard = true] - Set to false to use <animateTransform> instead of <animate>. 
+   * @returns {object} itself.
+   */
+  animate(attributes, standard = true) {
+    let animation = standard ? this.create('animate') : this.create('animateTransform');
+    animation.set(attributes);
 
     return this;
   }
@@ -259,7 +279,7 @@ class SvJs {
       a.click();
     } else {
       return;
-    } 
+    }
   }
 
   /**
