@@ -45,17 +45,16 @@ class SvJs {
   }
 
   /**
-   * Animate an attribute of an element. Set the second argument to false to use an <animateTransform> element.
+   * Animate an element using the Web Animations API.
    * 
    * @chainable
-   * @param {object} attributes - An object of attribute-value pairs.
-   * @param {boolean} [standard = true] - Set to false to use <animateTransform> instead of <animate>. 
+   * @param {(array|object)} keyframes - An array of keyframe objects, or an object of keyframe arrays.
+   * @param {object} options - A single duration, or an object containing timing properties. 
    * @returns {object} itself.
    */
-  animate(attributes, standard = true) {
-    let animation = standard ? this.create('animate') : this.create('animateTransform');
-    animation.set(attributes);
-
+  animate(keyframes, options) {
+    this.element.animate(keyframes, options);
+    
     return this;
   }
 
@@ -327,12 +326,13 @@ class SvJs {
    * Accurate cursor tracking via matrix transformation. Compatible with touch devices.
    * 
    * @chainable
+   * @param {function} callback - An optional callback function to trigger whenever the cursor moves.
    * @returns {object} itself.
    */
-  trackCursor() {
+  trackCursor(callback = null) {
     this.#isMainSVG();
 
-    let point = this.element.createSVGPoint();
+    let point = new DOMPoint();
 
     this.element.addEventListener('pointermove', (event) => {
       this.element.style.touchAction = 'none';
@@ -346,6 +346,10 @@ class SvJs {
     this.element.addEventListener('pointerleave', () => {
       this.element.style.touchAction = 'auto';
     });
+
+    if (callback !== null) {
+      this.element.addEventListener('pointermove', callback);
+    }
 
     return this;
   }
