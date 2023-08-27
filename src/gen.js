@@ -81,7 +81,7 @@ const Gen = {
    * @param {boolean} [float = true] - Set to false to return an integer.
    * @returns {number} The remapped number.
    */
-  mapRange: function(value, start1, stop1, start2, stop2, float = true) {
+  map: function(value, start1, stop1, start2, stop2, float = true) {
     let n = (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     return float ? n : Math.round(n);
   },
