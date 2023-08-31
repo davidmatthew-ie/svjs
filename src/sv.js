@@ -134,14 +134,41 @@ class SvJs {
   }
 
   /**
-   * Create a gradient and append it to the defs element.
+   * Creates a filter and appends it to the defs element.
+   * 
+   * @chainable
+   * @param {string} id - The id. Reference this when applying the filter.
+   * @returns {object} The created filter.
+   */
+  createFilter(id) {
+    this.#isMainSVG();
+
+    let filter = new SvJs('filter');
+    filter.set({
+      id: id,
+      x: '-25%',
+      y: '-25%',
+      width: '150%',
+      height: '150%',
+      filterUnits: 'userSpaceOnUse',
+      color_interpolation_filters: 'sRGB'
+    });
+
+    let defs = this.#defsCheck();
+    defs.appendChild(filter.element);
+
+    return filter;
+  }
+
+  /**
+   * Creates a gradient and appends it to the defs element.
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
    * @param {string} type - Accepts linear or radial.
    * @param {array} colours - An array of gradient colours to be applied equidistantly.
    * @param {number} [rotation = 45] - The angle of rotation. Ignored if gradient is radial.
-   * @returns {object} The created gradient element.
+   * @returns {object} The created gradient.
    */
   createGradient(id, type, colours, rotation = 45) {
     this.#isMainSVG();
@@ -167,7 +194,7 @@ class SvJs {
   }
 
   /**
-   * Create a pattern and append it to the defs element.
+   * Creates a pattern and appends it to the defs element.
    * 
    * @chainable
    * @param {string} id - The id. Reference this when applying the gradient.
