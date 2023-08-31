@@ -374,14 +374,19 @@ class SvJs {
   }
 
   /**
-   * Check if the def element already exists, and create it if it doesn't.
+   * Checks if the def element already exists, and creates it if it doesn't.
    * 
    * @returns {object} The defs element.
    */
   #defsCheck(element) {
-    return document.querySelector('defs') ?
-      document.querySelector('defs')
-      : this.create('defs').element;
+    let defs;
+    if (document.querySelector('defs')) {
+      defs = document.querySelector('defs');
+    } else {
+      defs = new SvJs('defs').element;
+      this.element.prepend(defs);
+    }
+    return defs;
   }
 
   /**
