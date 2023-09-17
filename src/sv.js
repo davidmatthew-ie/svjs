@@ -80,7 +80,12 @@ class SvJs {
    */
   create(element) {
     this.child = new SvJs(element);
-    this.element.appendChild(this.child.element);
+
+    if (element === 'defs') {
+      this.child.element = this.#defsCheck();
+    } else {
+      this.element.appendChild(this.child.element);
+    }
 
     return this.child;
   }
@@ -405,7 +410,7 @@ class SvJs {
    * 
    * @returns {object} The defs element.
    */
-  #defsCheck(element) {
+  #defsCheck() {
     let defs;
     if (document.querySelector('defs')) {
       defs = document.querySelector('defs');
