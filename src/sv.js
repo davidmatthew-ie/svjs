@@ -26,8 +26,17 @@ class SvJs {
     }
   }
 
+  /**
+   * An alias of the DOM addEventListener method.
+   * 
+   * @chainable
+   * @param {Event} type - The event type.
+   * @param {function} callback - The callback function.
+   * @returns {object} itself.
+   */
   addEventListener(type, callback) {
     this.element.addEventListener(type, callback);
+    
     return this;
   }
 
