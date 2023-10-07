@@ -9,6 +9,7 @@ It is inspired by the great [gySVG](https://github.com/graphery/graphery/tree/ma
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
 * [Generative Functions](#generative-functions)
+* [Noise Module](#noise-module) @todo
 
 ## Installation
 
@@ -37,13 +38,18 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 ### Method List:
 
 * [new SvJs()](#new-svjs)
+* [addEventListener](#addeventlistener)
 * [addTo()](#addto)
+* [animate()](#animate)
+* [content()](#content)
 * [create()](#create)
 * [createCurve()](#createcurve)
+* [createFilter()](#createfilter)
 * [createGradient()](#creategradient)
 * [createPattern()](#createpattern)
 * [delete()](#delete)
 * [get()](#get)
+* [getCentre()](#getcentre)
 * [moveTo()](#moveto)
 * [rotate()](#rotate)
 * [save()](#save)
@@ -76,6 +82,12 @@ const rect = new SvJs('rect');
 
 <hr>
 
+### `addEventListener()`
+
+@todo
+
+<hr>
+
 ### `addTo()`
 
 Add (or append) one element to another.
@@ -94,6 +106,18 @@ svg.addTo(document.getElementById('container'));
 // Appends the rect element to the parent SVG.
 rect.addTo(svg);
 ```
+
+<hr>
+
+### `animate()` 
+
+@todo
+
+<hr>
+
+### `content()` 
+
+@todo
 
 <hr>
 
@@ -119,6 +143,8 @@ const rect = svg.create('rect');
 
 ### `createCurve()`
 
+@todo - edit
+
 Creates a smooth cubic bezier curve from an array of points.
 
 _Parameters:_
@@ -143,6 +169,12 @@ const pts = [
 
 const path = svg.createCurve(pts, 1.66, true, '#f00', 'gold');
 ```
+
+<hr>
+
+### `createFilter()`
+
+@todo
 
 <hr>
 
@@ -225,6 +257,12 @@ _Chainable:_ no.
 // Get the fill value of our rect element.
 rect.get('fill');
 ```
+
+<hr>
+
+### `getCentre()`
+
+@todo
 
 <hr>
 
@@ -379,11 +417,20 @@ import { Gen } from '../../svjs/src/index.js';
 
 ### Function List
 
+* [chance()](#chance)
 * [constrain()](#constrain)
 * [dist()](#dist)
+* [gaussian()](#gaussian)
 * [interp()](#interp)
-* [mapRange()](#maprange)
+* [map()](#map)
+* [pareto()](#pareto)
 * [random()](#random)
+
+<hr>
+
+### `chance()`
+
+@todo
 
 <hr>
 
@@ -430,6 +477,12 @@ gen.dist(10, 12, 40, 50);
 
 <hr>
 
+### `gaussian()`
+
+@todo
+
+<hr>
+
 ### `interp()`
 
 Interpolates linearly between two values. Returns the midway point (0.5) by default.
@@ -454,7 +507,9 @@ gen.interp(5.25, 10.95);
 
 <hr>
 
-### `mapRange()`
+### `map()`
+
+@todo - edit
 
 Re-maps a number from one range to another.
 
@@ -471,6 +526,12 @@ _Returns:_ {number} The remapped number.
 gen.mapRange(5, 0, 10, 0, 100);
 // -> 50
 ```
+
+<hr>
+
+### `pareto()`
+
+@todo
 
 <hr>
 
@@ -506,3 +567,9 @@ let rainbow = ['red', 'yellow', 'pink', 'green', 'purple', 'orange', 'blue'];
 Gen.random(rainbow);
 -> 'purple'
 ```
+
+<hr>
+
+## Noise Module
+
+@todo
