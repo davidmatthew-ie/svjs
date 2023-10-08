@@ -28,7 +28,11 @@ You can then import it either via the `dist` folder (minified, with all modules 
 To install via the CDN link, ensure your script tag has `type="module"` declared. Then import it as follows (replace `latest` with a specific version if you prefer):
 
 ```javascript
+// Import just the core functionality.
 import { SvJs } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js';
+
+// Import the full library.
+import { SvJs, Gen, Noise } from 'https://cdn.jsdelivr.net/npm/svjs@latest/dist/svjs.min.js';
 ```
 
 ## Core SVG Functions
@@ -572,4 +576,39 @@ Gen.random(rainbow);
 
 ## Noise Module
 
-@todo
+This small module is an implementation of Ken Perlin's noise algorithm in 2D.
+
+### Method List
+* [new Noise()](#new-noise)
+* [get()](#noise-get)
+
+<hr>
+
+### `new Noise()`
+
+Class constructor. Creates an instance of the Noise class.
+
+_Paramaters:_ none.
+
+```javascript
+// Create an instance of the Noise class.
+const noise = new Noise();
+```
+
+<hr>
+
+### `get()` {#noise-get}
+
+Get the noise value at the specified co-ordinates.
+
+_Parameters:_
+* x {number} (required) The noise x co-ordinate.
+* y {number} (optional) The noise y co-ordinate. Defaults to 0.
+
+_Returns:_ {number} the noise value (float between -1 and 1).
+
+```javascript
+// Instantiate a Noise instance and fetch the noise value at the specified co-ordinates.
+const n = new Noise();
+const value = n.get(999);
+```
