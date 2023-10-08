@@ -9,7 +9,7 @@ It is inspired by the great [gySVG](https://github.com/graphery/graphery/tree/ma
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
 * [Generative Functions](#generative-functions)
-* [Noise Module](#noise-module) @todo
+* [Noise Module](#noise-module)
 
 ## Installation
 
@@ -688,9 +688,7 @@ Gen.random(rainbow);
 
 This small module is an implementation of Ken Perlin's noise algorithm in 2D.
 
-### Method List
-* [new Noise()](#new-noise)
-* [get()](#noise-get)
+It consists of a constructor and a single `get()` method.
 
 <hr>
 
@@ -707,7 +705,7 @@ const noise = new Noise();
 
 <hr>
 
-### `get()` {#noise-get}
+### `get()`
 
 Get the noise value at the specified co-ordinates.
 
