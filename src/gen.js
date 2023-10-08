@@ -7,7 +7,7 @@ const Gen = {
    * 
    * @param {number} [n1 = 50] - The chance of the return value being true. 50 by default.
    * @param {number} [n2 = null] - If not null, both arguments are interpreted as odds in the form n1 to n2.
-   * @returns {boolean}
+   * @returns {boolean} true or false.
    */
   chance: function(n1 = 50, n2 = null) {
     let n = (n2 !== null) ? n2 / (n1 + n2) * 100 : n1;
@@ -43,6 +43,7 @@ const Gen = {
 
   /**
    * Gets a random number based on the Box-Muller gaussian transform.
+   * 
    * By default, it typically returns results within a range of -3 to +3.
    * 
    * @param {number} [mean = 0] - The mean, 0 by default.

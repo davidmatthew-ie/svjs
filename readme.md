@@ -434,7 +434,21 @@ import { Gen } from '../../svjs/src/index.js';
 
 ### `chance()`
 
-@todo
+Return true if the supplied % is higher than a randomised %. If two arguments supplied, they are interpreted as odds.
+
+_Parameters:_
+* n1 {number} (optional) - The chance of the return value being true. 50 by default.
+* n2 {number} (optional) - Default is null. If not null, both arguments are interpreted as odds in the form n1 to n2.
+
+_Returns:_ {boolean} true or false.
+
+```javascript
+// The below returns true 60% of the time.
+Gen.chance(60);
+
+// There is a 7 to 2 chance of this returning true.
+Gen.chance(7, 2);
+```
 
 <hr>
 
@@ -483,7 +497,17 @@ gen.dist(10, 12, 40, 50);
 
 ### `gaussian()`
 
-@todo
+Gets a random number based on the Box-Muller gaussian transform.
+
+By default, it typically returns results within a range of -3 to +3.
+
+_Parameters:_
+* mean {number} (optional) - The mean, 0 by default.
+* sigma {number} (optional) - Sigma refers to the standard deviation, 1 by default.
+* float {boolean} (optional) - Default is true. Set to false to return an integer.
+
+_Returns:_ {number} The random gaussian.
+
 
 <hr>
 
@@ -513,8 +537,6 @@ gen.interp(5.25, 10.95);
 
 ### `map()`
 
-@todo - edit
-
 Re-maps a number from one range to another.
 
 _Parameters:_
@@ -523,19 +545,32 @@ _Parameters:_
 * stop1 {number} (required) The upper bound of the current range.
 * start2 {number} (required) The lower bound of the target range.
 * stop2 {number} (required) The upper bound of the target range.
+* float {boolean} (optional) - Default is true. Set to false to return an integer.
 
 _Returns:_ {number} The remapped number.
 
 ```javascript
-gen.mapRange(5, 0, 10, 0, 100);
-// -> 50
+gen.map(5, 0, 10, 0, 100);
+-> 50
 ```
 
 <hr>
 
 ### `pareto()`
 
-@todo
+Gets a random number based on the pareto power law distribution (80-20 rule).
+
+_Parameters:_
+* min {number} (required) - The minimum value to be returned.
+* float {boolean} (optional) - Default is true. Set to false to return an integer.
+
+_Returns:_ {number} The random pareto number.
+
+```javascript
+// Return a pareto-distributed integer, not less than 20.
+Gen.pareto(20, false);
+-> 32
+```
 
 <hr>
 
@@ -548,7 +583,7 @@ Without parameters, it will return a float between 0 and 1.
 _Parameters:_
 * min {number|array} (optional) The minimum value (result is equal to or higher than this). Default is 0. If array, an item is randomly chosen.
 * max {number} (optional) The maximum value (result is equal to or lower than this). Default is 1.
-* float {boolean} (optional) Default is true. Set to false to return an integer.
+* float {boolean} (optional) Default is false (unless no arguments provided). Set to true to return a floating point number.
 
 _Returns:_ {number} The random number or array item.
 
