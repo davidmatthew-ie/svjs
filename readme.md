@@ -88,7 +88,15 @@ const rect = new SvJs('rect');
 
 ### `addEventListener()`
 
-@todo
+An alias of the DOM addEventListener method.
+
+_Paramaters:_
+* type {Event} (required) The event type.
+* callback {function} (required) The callback function.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
 
 <hr>
 
@@ -115,13 +123,63 @@ rect.addTo(svg);
 
 ### `animate()` 
 
-@todo
+Animate an element using the Web Animations API.
+
+_Paramaters:_
+* keyframes {(array|object)} (required) An array of keyframe objects, or an object of keyframe arrays.
+* options {object|number} (required) An object containing timing properties, or a single number for the duration.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
+
+```javascript
+// Set up the keyframes (in this case an object of arrays).
+let keyframes = {
+  transform: [
+    'rotate(0deg) scale(1, 1)',
+    'rotate(180deg) scale(0.5, 1.5)',
+    'rotate(360deg) scale(1, 1)'
+  ]
+};
+
+// Set up the options.
+let options = {
+  duration: 5000,
+  iterations: Infinity
+};
+
+// Apply the animation to an SvJs element.
+circle.animate(keyframes, options);
+```
 
 <hr>
 
 ### `content()` 
 
-@todo
+Inserts content within an element. Useful for textual and style elements.
+
+_Paramaters:_
+* text {string} (required) The content to insert.
+
+_Returns:_ itself.
+
+_Chainable:_ yes.
+
+```javascript
+// Add content to a text element.
+let text = svg.create('text');
+text.content('Hello SVG World.');
+
+// Use content to apply styles to all paths.
+svg.create('style').content(`
+  path {
+    fill: none;
+    stroke-width: 0.75;
+    stroke-linecap: round;
+  }`
+);
+```
 
 <hr>
 
@@ -147,18 +205,13 @@ const rect = svg.create('rect');
 
 ### `createCurve()`
 
-@todo - edit
-
-Creates a smooth cubic bezier curve from an array of points.
+Creates a smooth, open bezier curve from an array of points.
 
 _Parameters:_
 * points {array} (required) A two-dimensional array of `[[x,y], [x,y]...]` points.
-* curveFactor {number} (optional) 0 means no curve. Default is 1.66 (approximates a circle given a square).
-* isClosed {boolean} (optional) Is the curve open or closed. Default is false (an open curve).
-* stroke {string} (optional) The stroke colour. Black by default.
-* fill {string} (optional) The fill colour. None by default.
+* curveFactor {number} (optional) 0 means no curve. Default is 1.
 
-_Returns:_ The created path object.
+_Returns:_ itself (the created path element).
 
 _Chainable:_ yes.
 
@@ -171,14 +224,32 @@ const pts = [
   [700, 500],
 ];
 
-const path = svg.createCurve(pts, 1.66, true, '#f00', 'gold');
+const path = svg.createCurve(pts, 1.66);
 ```
 
 <hr>
 
 ### `createFilter()`
 
-@todo
+Creates a filter and appends it to the defs element.
+
+_Parameters:_
+* id {string} (required) The id. Reference this when applying the filter.
+
+_Returns:_ itself (the created filter element).
+
+_Chainable:_ yes.
+
+```javascript
+// Initialise the filter.
+let filter = svg.createFilter('blur');
+
+// Create a blur effect.
+filter.create('feGaussianBlur').set({ stdDeviation: 10 });
+
+// Apply the filter to a SvJs element called circle.
+circle.set({ filter: 'url(#blur)' });
+```
 
 <hr>
 
@@ -266,7 +337,11 @@ rect.get('fill');
 
 ### `getCentre()`
 
-@todo
+Get a given element's centre { x, y } co-ordinates. Particularly useful for groups.
+
+_Parameters:_ none.
+
+_Returns:_ {object} the centre.x and centre.y co-ordinates.
 
 <hr>
 
@@ -406,7 +481,7 @@ const svg = new SvJs();
 svg.set({ viewBox: '0 0 1000 1000' }).trackCursor();
 
 console.log(svg.cursorX, svg.cursorY);
-// -> 210, 502
+-> 210, 502
 ```
 
 <hr>
