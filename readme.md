@@ -4,7 +4,7 @@ SvJs is a very light object-oriented library to help generative artists working 
 
 It is a thin wrapper over the real SVG spec with some useful generative functions included. This keeps its footprint extremely small whilst maintaining fidelity to the SVG spec.
 
-It is inspired by [gySVG](https://github.com/graphery/graphery/tree/master/svg) library, but takes a different approach under the hood and is more geared towards generative art. 
+It is inspired by the [gySVG](https://github.com/graphery/graphery/tree/master/svg) library, but takes a different approach under the hood and is more geared towards generative art. 
 
 * [Installation](#installation)
 * [Core SVG Functions](#core-svg-functions)
@@ -42,7 +42,7 @@ The `SvJs` class located at `src/sv.js` contains the core SVG-related functional
 ### Method List:
 
 * [new SvJs()](#new-svjs)
-* [addEventListener](#addeventlistener)
+* [addEventListener()](#addeventlistener)
 * [addTo()](#addto)
 * [animate()](#animate)
 * [content()](#content)
@@ -539,14 +539,14 @@ _Parameters:_
 _Returns:_ {number} The constrained number.
 
 ```javascript
-gen.constrain(50, 5, 10);
-// -> 10
+Gen.constrain(50, 5, 10);
+-> 10
 
-gen.constrain(2, 5, 10);
-// -> 5
+Gen.constrain(2, 5, 10);
+-> 5
 
-gen.constrain(6, 5, 10);
-// -> 6
+Gen.constrain(6, 5, 10);
+-> 6
 ```
 
 <hr>
@@ -564,8 +564,8 @@ _Parameters:_
 _Returns:_ {number} The distance between (x1, y1) and (x2, y2).
 
 ```javascript
-gen.dist(10, 12, 40, 50);
-// -> 48.41487374764082
+Gen.dist(10, 12, 40, 50);
+-> 48.41487374764082
 ```
 
 <hr>
@@ -583,6 +583,15 @@ _Parameters:_
 
 _Returns:_ {number} The random gaussian.
 
+```javascript
+// By default, uses a mean of 0 and sigma of 1.
+Gen.gaussian();
+-> 1.4712050780435197
+
+// Specify a mean of 5 and sigma of 2.
+Gen.gaussian(5, 2);
+-> 7.169042426896327
+```
 
 <hr>
 
@@ -598,14 +607,14 @@ _Parameters:_
 _Returns:_ {number} interpolated value.
 
 ```javascript
-gen.interp(5, 10);
-// -> 7.5
+Gen.interp(5, 10);
+-> 7.5
 
-gen.interp(5, 10, 0.4);
-// -> 7
+Gen.interp(5, 10, 0.4);
+-> 7
 
-gen.interp(5.25, 10.95);
-// -> 8.1
+Gen.interp(5.25, 10.95);
+-> 8.1
 ```
 
 <hr>
@@ -625,7 +634,7 @@ _Parameters:_
 _Returns:_ {number} The remapped number.
 
 ```javascript
-gen.map(5, 0, 10, 0, 100);
+Gen.map(5, 0, 10, 0, 100);
 -> 50
 ```
 
