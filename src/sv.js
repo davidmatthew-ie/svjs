@@ -4,22 +4,17 @@
 class SvJs {
 
   /**
-   * Class fields.
-   */
-  cursorX = null;
-  cursorY = null;
-  namespace = 'http://www.w3.org/2000/svg';
-
-  /**
    * Create an SVG element.
    * 
    * @param {string} [element] - The name of the SVG element to create. 
    * @param {string} [namespace] - The namespace url to reference.
    */
-  constructor(element = 'svg', namespace = this.namespace) {
+  constructor(element = 'svg', namespace = 'http://www.w3.org/2000/svg') {
     this.element = document.createElementNS(namespace, element);
+    this.cursorX = null;
+    this.cursorY = null;
 
-    this.#isValid(element);
+    this.#isValid();
 
     if (this.element.nodeName === 'svg') {
       this.element.setAttribute('xmlns', namespace);
@@ -443,14 +438,12 @@ class SvJs {
 
   /**
    * Check if the created SVG element is valid.
-   * 
-   * @param {string} element - The SVG element name to validate.
    */
-  #isValid(element) {
-    let elementToString = Object.prototype.toString.call(this.element).toLowerCase();
+  #isValid() {
+    const elementToString = Object.prototype.toString.call(this.element).toLowerCase();
 
-    if (elementToString !== `[object svg${element.toLowerCase()}element]`) {
-      throw new Error(`Invalid SVG element: ${elementToString}`); 
+    if (elementToString !== `[object svg${this.element.nodeName.toLowerCase()}element]`) {
+      throw new Error(`Invalid SVG element: ${this.element.nodeName}`); 
     }
   }
 }
